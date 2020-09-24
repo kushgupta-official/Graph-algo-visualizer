@@ -4,3 +4,11 @@
   outline: 1px solid gray;
   display: inline-block;
 }
+
+.startNode {
+  background-color: green;
+}
+
+.endNode {
+  background-color: red;
+}
