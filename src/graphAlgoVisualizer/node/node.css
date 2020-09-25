@@ -5,6 +5,14 @@
   display: inline-block;
 }
 
+.node-visited {
+  background-color: lightcyan;
+}
+
+.node-shortestPath {
+  background-color: purple;
+}
+
 .startNode {
   background-color: green;
 }

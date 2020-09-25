@@ -35,16 +35,13 @@ function getUnvisitedNeighbours(node, grid) {
   if (row - 1 >= 0 && grid[row - 1][column].isVisited !== true)
     unvisitedNeighbours.push(grid[row - 1][column]);
 
-  if (row + 1 < grid.length - 1 && grid[row + 1][column].isVisited !== true)
+  if (row + 1 < grid.length && grid[row + 1][column].isVisited !== true)
     unvisitedNeighbours.push(grid[row + 1][column]);
 
   if (column - 1 >= 0 && grid[row][column - 1].isVisited !== true)
     unvisitedNeighbours.push(grid[row][column - 1]);
 
-  if (
-    column + 1 < grid[0].length - 1 &&
-    grid[row][column + 1].isVisited !== true
-  )
+  if (column + 1 < grid[0].length && grid[row][column + 1].isVisited !== true)
     unvisitedNeighbours.push(grid[row][column + 1]);
 
   return unvisitedNeighbours;

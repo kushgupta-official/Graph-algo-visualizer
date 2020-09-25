@@ -6,9 +6,9 @@ import { dijkstra, getShortestPath } from "../algorithms/dijkstra.js";
 const total_rows = 20;
 const total_columns = 50;
 const startNode_Row = 10;
-const startNode_Col = 15;
-const endNode_Row = 15;
-const endNode_Col = 35;
+const startNode_Col = 10;
+const endNode_Row = 19;
+const endNode_Col = 49;
 
 class GraphAlgoVisualizer extends Component {
   state = {
@@ -34,6 +34,29 @@ class GraphAlgoVisualizer extends Component {
     }
     this.setState({ grid });
   }
+
+  animateDijkstra = (visitedNodesInOrder, shortestPath) => {
+    for (let i = 1; i < visitedNodesInOrder.length; i++) {
+      if (i === visitedNodesInOrder.length - 1) {
+        for (let j = 0; j < shortestPath.length; j++)
+          setTimeout(() => {
+            setTimeout(() => {
+              const node = shortestPath[j];
+              document.getElementById(
+                `node-${node.row}-${node.column}`
+              ).className = "node node-shortestPath";
+            }, 50 * j);
+          }, 10 * i);
+        return;
+      }
+      setTimeout(() => {
+        const node = visitedNodesInOrder[i];
+        document.getElementById(`node-${node.row}-${node.column}`).className =
+          "node node-visited";
+      }, 10 * i);
+    }
+  };
+
   visualizeDijkstra = () => {
     const { grid } = this.state;
     const startNode = grid[startNode_Row][startNode_Col];
@@ -41,7 +64,10 @@ class GraphAlgoVisualizer extends Component {
     const visitedNodesInOrder = dijkstra(grid, startNode, endNode);
     console.log(visitedNodesInOrder);
     const shortestPath = getShortestPath(grid, startNode, endNode);
-    console.log(shortestPath);
+    console.log(visitedNodesInOrder);
+    this.animateDijkstra(visitedNodesInOrder, shortestPath);
+    // console.log(shortestPath);
+    // console.log(grid);
   };
   render() {
     const { grid } = this.state;

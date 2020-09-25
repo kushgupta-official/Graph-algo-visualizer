@@ -4,7 +4,6 @@ import "./node.css";
 
 class Node extends Component {
   state = {};
-
   getClassName = () => {
     let str = "node";
     if (this.props.isStart === true) {
@@ -16,8 +15,19 @@ class Node extends Component {
   };
 
   render() {
-    //console.log(this.props);
-    return <div className={this.getClassName()}></div>;
+    const {
+      row,
+      column,
+      isStart,
+      isEnd,
+      distance,
+      isVisited,
+      previousNode,
+    } = this.props;
+    //  console.log(this.props);
+    return (
+      <div className={this.getClassName()} id={`node-${row}-${column}`}></div>
+    );
   }
 }
 
