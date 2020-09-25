@@ -9,15 +9,14 @@ class Node extends Component {
     let str = "node";
     if (this.props.isStart === true) {
       str = str + " startNode";
-      console.log("start");
     } else if (this.props.isEnd === true) {
       str = str + " endNode";
-      console.log("end");
     }
     return str;
   };
 
   render() {
+    //console.log(this.props);
     return <div className={this.getClassName()}></div>;
   }
 }
