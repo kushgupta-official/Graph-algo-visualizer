@@ -7,13 +7,15 @@ const total_rows = 20;
 const total_columns = 50;
 const startNode_Row = 10;
 const startNode_Col = 10;
-const endNode_Row = 19;
-const endNode_Col = 49;
+const endNode_Row = 10;
+const endNode_Col = 40;
 
 class GraphAlgoVisualizer extends Component {
   state = {
     grid: [],
+    isMousePressed: false,
   };
+
   componentDidMount() {
     const grid = [];
     for (let row = 0; row < total_rows; row++) {
@@ -27,6 +29,7 @@ class GraphAlgoVisualizer extends Component {
           distance: Infinity,
           isVisited: false,
           previousNode: null,
+          isWall: false,
         };
         currentRow.push(currentNode);
       }
@@ -34,6 +37,35 @@ class GraphAlgoVisualizer extends Component {
     }
     this.setState({ grid });
   }
+
+  getNewGridWithWallToggled = (row, column) => {
+    const newGrid = this.state.grid.slice();
+    const node = newGrid[row][column];
+    const newNode = {
+      ...node,
+      isWall: !node.isWall,
+    };
+    newGrid[row][column] = newNode;
+    return newGrid;
+  };
+
+  handleMouseDown = (row, column) => {
+    console.log(row, column, "mouse down");
+    const newGrid = this.getNewGridWithWallToggled(row, column);
+    this.setState({ grid: newGrid, isMousePressed: true });
+  };
+
+  handleMouseEnter = (row, column) => {
+    if (!this.state.isMousePressed) return;
+    console.log(row, column, "mouse enter");
+    const newGrid = this.getNewGridWithWallToggled(row, column);
+    this.setState({ grid: newGrid });
+  };
+
+  handleMouseUp = () => {
+    console.log("mouse up");
+    this.setState({ isMousePressed: false });
+  };
 
   animateDijkstra = (visitedNodesInOrder, shortestPath) => {
     for (let i = 1; i < visitedNodesInOrder.length; i++) {
@@ -71,7 +103,7 @@ class GraphAlgoVisualizer extends Component {
   };
   render() {
     const { grid } = this.state;
-    console.log(grid);
+    //  console.log(grid);
     return (
       <div>
         <button onClick={this.visualizeDijkstra}>Visualize Dijkstra</button>
@@ -88,6 +120,8 @@ class GraphAlgoVisualizer extends Component {
                     distance,
                     isVisited,
                     previousNode,
+                    isWall,
+                    isMousePressed,
                   } = node;
                   return (
                     <Node
@@ -99,6 +133,15 @@ class GraphAlgoVisualizer extends Component {
                       distance={distance}
                       isVisited={isVisited}
                       previousNode={previousNode}
+                      isWall={isWall}
+                      isMousePressed={isMousePressed}
+                      onMouseDown={(row, column) =>
+                        this.handleMouseDown(row, column)
+                      }
+                      onMouseEnter={(row, column) =>
+                        this.handleMouseEnter(row, column)
+                      }
+                      onMouseUp={() => this.handleMouseUp()}
                     ></Node>
                   );
                 })}

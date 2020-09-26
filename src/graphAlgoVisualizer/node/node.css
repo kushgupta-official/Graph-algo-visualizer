@@ -6,15 +6,19 @@
 }
 
 .node-visited {
-  background-color: lightcyan;
+  background-color: pink;
 }
 
 .node-shortestPath {
-  background-color: purple;
+  background-color: blue;
 }
 
 .startNode {
   background-color: green;
+}
+
+.wall-true {
+  background-color: brown;
 }
 
 .endNode {

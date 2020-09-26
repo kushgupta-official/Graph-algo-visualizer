@@ -1,3 +1,9 @@
+/*Problems:
+  1. when an operation is going on, no other operation will work
+  2. reset button
+  3. a star algo
+  4. time complexity
+*/
 export function dijkstra(grid, startNode, endNode) {
   const visitedNodeInOrder = [];
   startNode.distance = 0;
@@ -6,6 +12,12 @@ export function dijkstra(grid, startNode, endNode) {
   while (!!unvisitedNodes.length) {
     sortNodesByDistance(unvisitedNodes);
     const nearestNode = unvisitedNodes.shift();
+    if (nearestNode.distance === Infinity) {
+      return visitedNodeInOrder;
+    }
+    if (nearestNode.isWall === true) {
+      continue;
+    }
     nearestNode.isVisited = true;
     visitedNodeInOrder.push(nearestNode);
     if (nearestNode === endNode) {
@@ -60,6 +72,9 @@ function getAllNodes(grid) {
 export function getShortestPath(grid, startNode, endNode) {
   const shortestPath = [];
   let previous = endNode.previousNode;
+  if (previous === null) {
+    return shortestPath;
+  }
   while (previous !== startNode) {
     shortestPath.push(previous);
     previous = previous.previousNode;

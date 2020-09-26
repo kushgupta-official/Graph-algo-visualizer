@@ -11,6 +11,9 @@ class Node extends Component {
     } else if (this.props.isEnd === true) {
       str = str + " endNode";
     }
+    if (this.props.isWall === true) {
+      str = str + " wall-true";
+    }
     return str;
   };
 
@@ -23,10 +26,20 @@ class Node extends Component {
       distance,
       isVisited,
       previousNode,
+      isWall,
+      onMouseDown,
+      onMouseUp,
+      onMouseEnter,
     } = this.props;
-    //  console.log(this.props);
+    //console.log(  this.props);
     return (
-      <div className={this.getClassName()} id={`node-${row}-${column}`}></div>
+      <div
+        className={this.getClassName()}
+        id={`node-${row}-${column}`}
+        onMouseDown={() => onMouseDown(row, column)}
+        onMouseEnter={() => onMouseEnter(row, column)}
+        onMouseUp={() => onMouseUp()}
+      ></div>
     );
   }
 }
