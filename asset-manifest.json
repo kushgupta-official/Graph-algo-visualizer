@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/Graph-algo-visualizer/static/css/main.5fdd2f52.chunk.css",
-    "main.js": "/Graph-algo-visualizer/static/js/main.5d78b7f7.chunk.js",
-    "main.js.map": "/Graph-algo-visualizer/static/js/main.5d78b7f7.chunk.js.map",
+    "main.css": "/Graph-algo-visualizer/static/css/main.ab53b8da.chunk.css",
+    "main.js": "/Graph-algo-visualizer/static/js/main.ce1c81cc.chunk.js",
+    "main.js.map": "/Graph-algo-visualizer/static/js/main.ce1c81cc.chunk.js.map",
     "runtime-main.js": "/Graph-algo-visualizer/static/js/runtime-main.6f133fd8.js",
     "runtime-main.js.map": "/Graph-algo-visualizer/static/js/runtime-main.6f133fd8.js.map",
     "static/css/2.8aa5a7f8.chunk.css": "/Graph-algo-visualizer/static/css/2.8aa5a7f8.chunk.css",
-    "static/js/2.0f0361eb.chunk.js": "/Graph-algo-visualizer/static/js/2.0f0361eb.chunk.js",
-    "static/js/2.0f0361eb.chunk.js.map": "/Graph-algo-visualizer/static/js/2.0f0361eb.chunk.js.map",
+    "static/js/2.9814836d.chunk.js": "/Graph-algo-visualizer/static/js/2.9814836d.chunk.js",
+    "static/js/2.9814836d.chunk.js.map": "/Graph-algo-visualizer/static/js/2.9814836d.chunk.js.map",
     "index.html": "/Graph-algo-visualizer/index.html",
-    "precache-manifest.2cb73477d742b8a7df5731ac02c3c918.js": "/Graph-algo-visualizer/precache-manifest.2cb73477d742b8a7df5731ac02c3c918.js",
+    "precache-manifest.aa0d2221f46611ca7e33b3fedfdebd53.js": "/Graph-algo-visualizer/precache-manifest.aa0d2221f46611ca7e33b3fedfdebd53.js",
     "service-worker.js": "/Graph-algo-visualizer/service-worker.js",
     "static/css/2.8aa5a7f8.chunk.css.map": "/Graph-algo-visualizer/static/css/2.8aa5a7f8.chunk.css.map",
-    "static/css/main.5fdd2f52.chunk.css.map": "/Graph-algo-visualizer/static/css/main.5fdd2f52.chunk.css.map",
-    "static/js/2.0f0361eb.chunk.js.LICENSE.txt": "/Graph-algo-visualizer/static/js/2.0f0361eb.chunk.js.LICENSE.txt"
+    "static/css/main.ab53b8da.chunk.css.map": "/Graph-algo-visualizer/static/css/main.ab53b8da.chunk.css.map",
+    "static/js/2.9814836d.chunk.js.LICENSE.txt": "/Graph-algo-visualizer/static/js/2.9814836d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.6f133fd8.js",
     "static/css/2.8aa5a7f8.chunk.css",
-    "static/js/2.0f0361eb.chunk.js",
-    "static/css/main.5fdd2f52.chunk.css",
-    "static/js/main.5d78b7f7.chunk.js"
+    "static/js/2.9814836d.chunk.js",
+    "static/css/main.ab53b8da.chunk.css",
+    "static/js/main.ce1c81cc.chunk.js"
   ]
 }
