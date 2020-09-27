@@ -3,7 +3,7 @@ import Node from "./node/node.jsx";
 import "./graphAlgoVisualizer.css";
 import { dijkstra, getShortestPath } from "../algorithms/dijkstra.js";
 
-const total_rows = 20;
+const total_rows = 18;
 const total_columns = 50;
 const startNode_Row = 10;
 const startNode_Col = 10;
@@ -105,8 +105,13 @@ class GraphAlgoVisualizer extends Component {
     const { grid } = this.state;
     //  console.log(grid);
     return (
-      <div>
-        <button onClick={this.visualizeDijkstra}>Visualize Dijkstra</button>
+      <div className="container-fluid">
+        <button
+          className="btn btn-primary btn-lg"
+          onClick={this.visualizeDijkstra}
+        >
+          Visualize Dijkstra Algorithm
+        </button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
