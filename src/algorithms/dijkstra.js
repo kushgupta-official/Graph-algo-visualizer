@@ -69,7 +69,7 @@ function getAllNodes(grid) {
   return nodes;
 }
 
-export function getShortestPath(grid, startNode, endNode) {
+export function getShortestPathDijkstra(grid, startNode, endNode) {
   const shortestPath = [];
   let previous = endNode.previousNode;
   if (previous === null) {

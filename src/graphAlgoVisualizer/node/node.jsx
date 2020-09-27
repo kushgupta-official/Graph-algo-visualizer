@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "./node.css";
-//var t = 1;
 
 class Node extends Component {
   state = {};
@@ -10,8 +9,7 @@ class Node extends Component {
       str = str + " startNode";
     } else if (this.props.isEnd === true) {
       str = str + " endNode";
-    }
-    if (this.props.isWall === true) {
+    } else if (this.props.isWall === true) {
       str = str + " wall-true";
     }
     return str;

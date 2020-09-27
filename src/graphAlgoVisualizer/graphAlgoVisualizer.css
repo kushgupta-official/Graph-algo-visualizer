@@ -1,3 +1,9 @@
 .grid {
   margin: 30px 100px 100px;
 }
+
+.time {
+  position: absolute;
+  font-size: x-large;
+  right: 20%;
+}
