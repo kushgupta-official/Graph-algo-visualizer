@@ -36,7 +36,7 @@ class Node extends Component {
         id={`node-${row}-${column}`}
         onMouseDown={() => onMouseDown(row, column)}
         onMouseEnter={() => onMouseEnter(row, column)}
-        onMouseUp={() => onMouseUp()}
+        onMouseUp={() => onMouseUp(row, column)}
       ></div>
     );
   }

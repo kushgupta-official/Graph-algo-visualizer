@@ -1,3 +1,6 @@
+//time complexity name change
+//changing position of start and end
+
 import React, { Component } from "react";
 import Node from "./node/node.jsx";
 import "./graphAlgoVisualizer.css";
@@ -6,16 +9,19 @@ import { aStar, getShortestPathAstar } from "../algorithms/aStar.js";
 
 const total_rows = 18;
 const total_columns = 50;
-const startNode_Row = 10;
-const startNode_Col = 10;
-const endNode_Row = 10;
-const endNode_Col = 40;
+var startNode_Row = 5;
+var startNode_Col = 10;
+var endNode_Row = 10;
+var endNode_Col = 40;
+var time = 0;
 
 class GraphAlgoVisualizer extends Component {
   state = {
     grid: [],
     isMousePressed: false,
     timeComplexity: 0,
+    isMovingStart: false,
+    isMovingEnd: false,
   };
 
   componentDidMount() {
@@ -61,14 +67,36 @@ class GraphAlgoVisualizer extends Component {
       console.log(row, column, "mouse down");
       const newGrid = this.getNewGridWithWallToggled(row, column);
       this.setState({ grid: newGrid, isMousePressed: true });
-    } else {
+    }
+    // if user wants to change positon of start or end node
+    else {
       console.log(row, column, "mouse down starting or ending");
       this.setState({ isMousePressed: true });
+      if (row === startNode_Row && column === startNode_Col) {
+        const newGrid = this.state.grid.slice();
+        const node = newGrid[row][column];
+        const newNode = {
+          ...node,
+          isStart: false,
+        };
+        newGrid[row][column] = newNode;
+        this.setState({ grid: newGrid, isMovingStart: true });
+      } else if (row === endNode_Row && column === endNode_Col) {
+        const newGrid = this.state.grid.slice();
+        const node = newGrid[row][column];
+        const newNode = {
+          ...node,
+          isEnd: false,
+        };
+        newGrid[row][column] = newNode;
+        this.setState({ grid: newGrid, isMovingEnd: true });
+      }
     }
   };
 
   handleMouseEnter = (row, column) => {
     if (!this.state.isMousePressed) return;
+    if (this.state.isMovingStart || this.state.isMovingEnd) return;
     if (
       !(
         (row === startNode_Row && column === startNode_Col) ||
@@ -83,9 +111,36 @@ class GraphAlgoVisualizer extends Component {
     }
   };
 
-  handleMouseUp = () => {
+  handleMouseUp = (row, column) => {
     console.log("mouse up");
     this.setState({ isMousePressed: false });
+
+    //if moving start or end
+    if (this.state.isMovingStart === true) {
+      const newGrid = this.state.grid.slice();
+      const node = newGrid[row][column];
+      const newNode = {
+        ...node,
+        isWall: false,
+        isStart: true,
+      };
+      newGrid[row][column] = newNode;
+      this.setState({ grid: newGrid, isMovingStart: false });
+      startNode_Row = row;
+      startNode_Col = column;
+    } else if (this.state.isMovingEnd === true) {
+      const newGrid = this.state.grid.slice();
+      const node = newGrid[row][column];
+      const newNode = {
+        ...node,
+        isWall: false,
+        isEnd: true,
+      };
+      newGrid[row][column] = newNode;
+      this.setState({ grid: newGrid, isMovingEnd: false });
+      endNode_Row = row;
+      endNode_Col = column;
+    }
   };
 
   animateAlgo = (visitedNodesInOrder, shortestPath) => {
@@ -111,6 +166,7 @@ class GraphAlgoVisualizer extends Component {
   };
 
   visualizeDijkstra = () => {
+    this.clearAlgo(); //for clearing grid for any previous algo if implemented
     const { grid } = this.state;
     const startNode = grid[startNode_Row][startNode_Col];
     const endNode = grid[endNode_Row][endNode_Col];
@@ -125,6 +181,7 @@ class GraphAlgoVisualizer extends Component {
   };
 
   visualizeAstar = () => {
+    this.clearAlgo(); //for clearing grid for any previous algo if implemented
     const { grid } = this.state;
     const startNode = grid[startNode_Row][startNode_Col];
     const endNode = grid[endNode_Row][endNode_Col];
@@ -245,7 +302,9 @@ class GraphAlgoVisualizer extends Component {
                       onMouseEnter={(row, column) =>
                         this.handleMouseEnter(row, column)
                       }
-                      onMouseUp={() => this.handleMouseUp()}
+                      onMouseUp={(row, column) =>
+                        this.handleMouseUp(row, column)
+                      }
                     ></Node>
                   );
                 })}
