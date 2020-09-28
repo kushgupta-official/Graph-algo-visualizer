@@ -88,29 +88,7 @@ class GraphAlgoVisualizer extends Component {
     this.setState({ isMousePressed: false });
   };
 
-  animateDijkstra = (visitedNodesInOrder, shortestPath) => {
-    for (let i = 1; i < visitedNodesInOrder.length; i++) {
-      if (i === visitedNodesInOrder.length - 1) {
-        for (let j = 0; j < shortestPath.length; j++)
-          setTimeout(() => {
-            setTimeout(() => {
-              const node = shortestPath[j];
-              document.getElementById(
-                `node-${node.row}-${node.column}`
-              ).className = "node node-shortestPath";
-            }, 50 * j);
-          }, 10 * i);
-        return;
-      }
-      setTimeout(() => {
-        const node = visitedNodesInOrder[i];
-        document.getElementById(`node-${node.row}-${node.column}`).className =
-          "node node-visited";
-      }, 10 * i);
-    }
-  };
-
-  animateAstar = (visitedNodesInOrder, shortestPath) => {
+  animateAlgo = (visitedNodesInOrder, shortestPath) => {
     for (let i = 1; i < visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length - 1) {
         for (let j = 0; j < shortestPath.length; j++)
@@ -140,7 +118,7 @@ class GraphAlgoVisualizer extends Component {
     //console.log(visitedNodesInOrder);
     const shortestPath = getShortestPathDijkstra(grid, startNode, endNode);
     //console.log(visitedNodesInOrder);
-    this.animateDijkstra(visitedNodesInOrder, shortestPath);
+    this.animateAlgo(visitedNodesInOrder, shortestPath);
     this.setState({ timeComplexity: visitedNodesInOrder.length });
     // console.log(shortestPath);
     // console.log(grid);
@@ -154,11 +132,56 @@ class GraphAlgoVisualizer extends Component {
     //console.log(visitedNodesInOrder);
     const shortestPath = getShortestPathAstar(grid, startNode, endNode);
     console.log(visitedNodesInOrder);
-    this.animateAstar(visitedNodesInOrder, shortestPath);
+    this.animateAlgo(visitedNodesInOrder, shortestPath);
     this.setState({ timeComplexity: visitedNodesInOrder.length });
     // console.log(shortestPath);
     // console.log(grid);
   };
+
+  clearAlgo = () => {
+    const newGrid = this.state.grid;
+    for (let row = 0; row < total_rows; row++) {
+      for (let column = 0; column < total_columns; column++) {
+        newGrid[row][column].distance = Infinity;
+        newGrid[row][column].isVisited = false;
+        newGrid[row][column].previousNode = null;
+        if (
+          !(
+            (row === startNode_Row && column === startNode_Col) ||
+            (row === endNode_Row && column === endNode_Col) ||
+            newGrid[row][column].isWall === true
+          )
+        ) {
+          console.log("hi");
+          document.getElementById(`node-${row}-${column}`).className = "node";
+        }
+      }
+    }
+    this.setState({ grid: newGrid, timeComplexity: 0 });
+  };
+
+  undoAlgoAndWalls = () => {
+    const newGrid = this.state.grid;
+    for (let row = 0; row < total_rows; row++) {
+      for (let column = 0; column < total_columns; column++) {
+        newGrid[row][column].distance = Infinity;
+        newGrid[row][column].isVisited = false;
+        newGrid[row][column].previousNode = null;
+        newGrid[row][column].isWall = false;
+        if (
+          !(
+            (row === startNode_Row && column === startNode_Col) ||
+            (row === endNode_Row && column === endNode_Col)
+          )
+        ) {
+          console.log("hi");
+          document.getElementById(`node-${row}-${column}`).className = "node";
+        }
+      }
+    }
+    this.setState({ grid: newGrid, timeComplexity: 0 });
+  };
+
   render() {
     const { grid } = this.state;
     //  console.log(grid);
@@ -176,8 +199,17 @@ class GraphAlgoVisualizer extends Component {
         >
           Visualize A* Algorithm
         </button>
+        <button
+          className="btn btn-primary btn-lg"
+          onClick={this.undoAlgoAndWalls}
+        >
+          Undo Algo and walls
+        </button>
+        <button className="btn btn-primary btn-lg" onClick={this.clearAlgo}>
+          Clear Algo
+        </button>
         <span className="time">
-          Time Taken for this Algorithm = {this.state.timeComplexity}
+          Time Complexity = {this.state.timeComplexity}
         </span>
         <div className="grid">
           {grid.map((row, rowIdx) => {

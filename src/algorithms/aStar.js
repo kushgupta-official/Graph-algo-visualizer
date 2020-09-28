@@ -9,7 +9,7 @@ export function aStar(grid, startNode, endNode) {
   while (!!unvisitedNodes.length) {
     sortNodesByValueF(unvisitedNodes);
     const nextNode = unvisitedNodes.shift();
-    if (nextNode === Infinity) {
+    if (nextNode.distance === Infinity) {
       return visitedNodesInOrder;
     }
     if (nextNode.isWall) {
