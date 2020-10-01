@@ -5,5 +5,11 @@
 .time {
   position: absolute;
   font-size: x-large;
-  right: 20%;
+  right: 10%;
+}
+
+.pathLength {
+  position: absolute;
+  font-size: x-large;
+  right: 30%;
 }

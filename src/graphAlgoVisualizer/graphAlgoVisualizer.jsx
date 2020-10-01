@@ -1,25 +1,22 @@
-//time complexity name change
-//changing position of start and end
-
 import React, { Component } from "react";
 import Node from "./node/node.jsx";
 import "./graphAlgoVisualizer.css";
 import { dijkstra, getShortestPathDijkstra } from "../algorithms/dijkstra.js";
 import { aStar, getShortestPathAstar } from "../algorithms/aStar.js";
 
-const total_rows = 18;
+const total_rows = 22;
 const total_columns = 50;
 var startNode_Row = 5;
 var startNode_Col = 10;
 var endNode_Row = 10;
 var endNode_Col = 40;
-var time = 0;
 
 class GraphAlgoVisualizer extends Component {
   state = {
     grid: [],
     isMousePressed: false,
     timeComplexity: 0,
+    pathLength: 0,
     isMovingStart: false,
     isMovingEnd: false,
   };
@@ -166,6 +163,8 @@ class GraphAlgoVisualizer extends Component {
   };
 
   visualizeDijkstra = () => {
+    // const toBeDisabled = document.getElementById("button");
+    // toBeDisabled.disabled = true;
     this.clearAlgo(); //for clearing grid for any previous algo if implemented
     const { grid } = this.state;
     const startNode = grid[startNode_Row][startNode_Col];
@@ -175,7 +174,11 @@ class GraphAlgoVisualizer extends Component {
     const shortestPath = getShortestPathDijkstra(grid, startNode, endNode);
     //console.log(visitedNodesInOrder);
     this.animateAlgo(visitedNodesInOrder, shortestPath);
-    this.setState({ timeComplexity: visitedNodesInOrder.length });
+    this.setState({
+      timeComplexity: visitedNodesInOrder.length,
+      pathLength: shortestPath.length,
+    });
+    // toBeDisabled.disabled = false;
     // console.log(shortestPath);
     // console.log(grid);
   };
@@ -190,7 +193,10 @@ class GraphAlgoVisualizer extends Component {
     const shortestPath = getShortestPathAstar(grid, startNode, endNode);
     console.log(visitedNodesInOrder);
     this.animateAlgo(visitedNodesInOrder, shortestPath);
-    this.setState({ timeComplexity: visitedNodesInOrder.length });
+    this.setState({
+      timeComplexity: visitedNodesInOrder.length,
+      pathLength: shortestPath.length,
+    });
     // console.log(shortestPath);
     // console.log(grid);
   };
@@ -209,12 +215,11 @@ class GraphAlgoVisualizer extends Component {
             newGrid[row][column].isWall === true
           )
         ) {
-          console.log("hi");
           document.getElementById(`node-${row}-${column}`).className = "node";
         }
       }
     }
-    this.setState({ grid: newGrid, timeComplexity: 0 });
+    this.setState({ grid: newGrid, timeComplexity: 0, pathLength: 0 });
   };
 
   undoAlgoAndWalls = () => {
@@ -231,12 +236,11 @@ class GraphAlgoVisualizer extends Component {
             (row === endNode_Row && column === endNode_Col)
           )
         ) {
-          console.log("hi");
           document.getElementById(`node-${row}-${column}`).className = "node";
         }
       }
     }
-    this.setState({ grid: newGrid, timeComplexity: 0 });
+    this.setState({ grid: newGrid, timeComplexity: 0, pathLength: 0 });
   };
 
   render() {
@@ -246,27 +250,37 @@ class GraphAlgoVisualizer extends Component {
       <div className="container-fluid">
         <button
           className="btn btn-primary btn-lg"
+          id="function"
           onClick={this.visualizeDijkstra}
         >
           Visualize Dijkstra Algorithm
         </button>
         <button
           className="btn btn-primary btn-lg"
+          id="function"
           onClick={this.visualizeAstar}
         >
           Visualize A* Algorithm
         </button>
         <button
           className="btn btn-primary btn-lg"
+          id="function"
           onClick={this.undoAlgoAndWalls}
         >
           Undo Algo and walls
         </button>
-        <button className="btn btn-primary btn-lg" onClick={this.clearAlgo}>
+        <button
+          className="btn btn-primary btn-lg"
+          id="function"
+          onClick={this.clearAlgo}
+        >
           Clear Algo
         </button>
         <span className="time">
           Time Complexity = {this.state.timeComplexity}
+        </span>
+        <span className="pathLength">
+          Path Length = {this.state.pathLength}
         </span>
         <div className="grid">
           {grid.map((row, rowIdx) => {

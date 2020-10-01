@@ -2,15 +2,45 @@
   width: 25px;
   height: 25px;
   outline: 1px solid gray;
+  /* display: inline-block; */
   display: inline-block;
+  margin-top: -4px;
 }
 
 .node-visited {
-  background-color: pink;
+  /* background-color: lightblue; */
+  animation-name: visiting;
+  animation-duration: 0.2s;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  animation-play-state: running;
+}
+
+@keyframes visiting {
+  from {
+    background-color: darkblue;
+  }
+  to {
+    background-color: lightblue;
+  }
 }
 
 .node-shortestPath {
-  background-color: blue;
+  /* background-color: rgb(19, 180, 27); */
+  animation-name: path;
+  animation-duration: 0.2s;
+  animation-direction: normal;
+  animation-play-state: running;
+  animation-fill-mode: forwards;
+}
+
+@keyframes path {
+  from {
+    background-color: darkgreen;
+  }
+  to {
+    background-color: lightgreen;
+  }
 }
 
 .startNode {
