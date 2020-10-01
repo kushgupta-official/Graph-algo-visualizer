@@ -4,12 +4,12 @@
 
 .time {
   position: absolute;
-  font-size: x-large;
+  font-size: large;
   right: 10%;
 }
 
 .pathLength {
   position: absolute;
-  font-size: x-large;
+  font-size: large;
   right: 30%;
 }

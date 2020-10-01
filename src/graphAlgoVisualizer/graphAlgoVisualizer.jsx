@@ -3,6 +3,7 @@ import Node from "./node/node.jsx";
 import "./graphAlgoVisualizer.css";
 import { dijkstra, getShortestPathDijkstra } from "../algorithms/dijkstra.js";
 import { aStar, getShortestPathAstar } from "../algorithms/aStar.js";
+import { bfs, getPath } from "../algorithms/bfs.js";
 
 const total_rows = 22;
 const total_columns = 50;
@@ -201,6 +202,24 @@ class GraphAlgoVisualizer extends Component {
     // console.log(grid);
   };
 
+  visualizeBFS = () => {
+    this.clearAlgo(); //for clearing grid for any previous algo if implemented
+    const { grid } = this.state;
+    const startNode = grid[startNode_Row][startNode_Col];
+    const endNode = grid[endNode_Row][endNode_Col];
+    const visitedNodesInOrder = bfs(grid, startNode, endNode);
+    //console.log(visitedNodesInOrder);
+    const path = getPath(grid, startNode, endNode);
+    console.log(visitedNodesInOrder);
+    this.animateAlgo(visitedNodesInOrder, path);
+    this.setState({
+      timeComplexity: visitedNodesInOrder.length,
+      pathLength: path.length,
+    });
+    console.log(path);
+    console.log(grid);
+  };
+
   clearAlgo = () => {
     const newGrid = this.state.grid;
     for (let row = 0; row < total_rows; row++) {
@@ -265,6 +284,13 @@ class GraphAlgoVisualizer extends Component {
         <button
           className="btn btn-primary btn-lg"
           id="function"
+          onClick={this.visualizeBFS}
+        >
+          Breadth First Search
+        </button>
+        <button
+          className="btn btn-primary btn-lg"
+          id="function"
           onClick={this.undoAlgoAndWalls}
         >
           Undo Algo and walls
@@ -276,12 +302,14 @@ class GraphAlgoVisualizer extends Component {
         >
           Clear Algo
         </button>
-        <span className="time">
-          Time Complexity = {this.state.timeComplexity}
-        </span>
-        <span className="pathLength">
-          Path Length = {this.state.pathLength}
-        </span>
+        <div>
+          <span className="time">
+            Time Complexity = {this.state.timeComplexity}
+          </span>
+          <span className="pathLength">
+            Path Length = {this.state.pathLength}
+          </span>
+        </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
