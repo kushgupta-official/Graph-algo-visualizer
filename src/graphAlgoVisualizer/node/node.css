@@ -1,8 +1,7 @@
 .node {
-  width: 25px;
-  height: 25px;
+  width: 30px;
+  height: 30px;
   outline: 1px solid gray;
-  /* display: inline-block; */
   display: inline-block;
   margin-top: -4px;
 }
@@ -49,6 +48,23 @@
 
 .wall-true {
   background-color: brown;
+  animation-name: wall;
+  animation-duration: 0.1s;
+  animation-iteration-count: 1;
+  animation-play-state: running;
+  animation-timing-function: ease-out;
+}
+
+@keyframes wall {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }
 
 .endNode {

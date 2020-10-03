@@ -5,13 +5,14 @@ import { dijkstra, getShortestPathDijkstra } from "../algorithms/dijkstra.js";
 import { aStar, getShortestPathAstar } from "../algorithms/aStar.js";
 import { bfs, getPath } from "../algorithms/bfs.js";
 
-const total_rows = 22;
-const total_columns = 50;
+const total_rows = 20;
+const total_columns = 40;
 var startNode_Row = 5;
 var startNode_Col = 10;
 var endNode_Row = 10;
-var endNode_Col = 40;
+var endNode_Col = 37;
 
+const Checkbox = (props) => <input type="checkbox" {...props} />;
 class GraphAlgoVisualizer extends Component {
   state = {
     grid: [],
@@ -20,6 +21,7 @@ class GraphAlgoVisualizer extends Component {
     pathLength: 0,
     isMovingStart: false,
     isMovingEnd: false,
+    addWeights: false,
   };
 
   componentDidMount() {
@@ -262,6 +264,12 @@ class GraphAlgoVisualizer extends Component {
     this.setState({ grid: newGrid, timeComplexity: 0, pathLength: 0 });
   };
 
+  handleCheckboxChange = () => {
+    console.log(this.state.addWeights);
+    this.setState({ addWeights: !this.state.addWeights });
+    console.log(this.state.addWeights, "hi");
+  };
+
   render() {
     const { grid } = this.state;
     //  console.log(grid);
@@ -302,6 +310,13 @@ class GraphAlgoVisualizer extends Component {
         >
           Clear Algo
         </button>
+        <label>
+          <Checkbox
+            checked={this.state.addWeights}
+            onChange={this.handleCheckboxChange}
+          />
+          <span>Label Text</span>
+        </label>
         <div>
           <span className="time">
             Time Complexity = {this.state.timeComplexity}
