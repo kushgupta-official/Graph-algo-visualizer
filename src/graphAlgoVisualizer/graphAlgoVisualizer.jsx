@@ -11,6 +11,7 @@ var startNode_Row = 5;
 var startNode_Col = 10;
 var endNode_Row = 10;
 var endNode_Col = 37;
+const FixedWeight = 10;
 
 const Checkbox = (props) => <input type="checkbox" {...props} />;
 class GraphAlgoVisualizer extends Component {
@@ -64,9 +65,9 @@ class GraphAlgoVisualizer extends Component {
     const node = newGrid[row][column];
     let changeInValue = 0;
     if (node.weight === 0) {
-      changeInValue = 10;
+      changeInValue = FixedWeight;
     } else {
-      changeInValue = -10;
+      changeInValue = -FixedWeight;
     }
     const newNode = {
       ...node,
@@ -184,14 +185,14 @@ class GraphAlgoVisualizer extends Component {
                 `node-${node.row}-${node.column}`
               ).className = "node node-shortestPath";
             }, 50 * j);
-          }, 10 * i);
+          }, 25 * i);
         return;
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
         document.getElementById(`node-${node.row}-${node.column}`).className =
           "node node-visited";
-      }, 10 * i);
+      }, 25 * i);
     }
   };
 
@@ -251,7 +252,7 @@ class GraphAlgoVisualizer extends Component {
     console.log(path);
     console.log(grid);
   };
-
+  //clear visitedNodes and shortestPath properties from the grid leaving walls and weights untouched
   clearAlgo = () => {
     const newGrid = this.state.grid;
     for (let row = 0; row < total_rows; row++) {

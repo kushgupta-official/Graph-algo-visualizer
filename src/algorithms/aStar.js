@@ -45,20 +45,20 @@ function updateUnvisitedNeighbours(currentNode, targetNode, grid) {
     (Math.abs(currentNode.row - targetNode.row) +
       Math.abs(currentNode.column - targetNode.column));
   for (let ite of unvisitedNeighbours) {
-    if (
-      ite.distance >
+    // if (
+    //   ite.distance >
+    //   distanceBetweenCurrentAndTarget +
+    //     ite.weight +
+    //     Math.abs(ite.row - targetNode.row) +
+    //     Math.abs(ite.column - targetNode.column)
+    // ) {
+    ite.distance =
       distanceBetweenCurrentAndTarget +
-        ite.weight +
-        Math.abs(ite.row - targetNode.row) +
-        Math.abs(ite.column - targetNode.column)
-    ) {
-      ite.distance =
-        distanceBetweenCurrentAndTarget +
-        ite.weight +
-        Math.abs(ite.row - targetNode.row) +
-        Math.abs(ite.column - targetNode.column);
-      ite.previousNode = currentNode;
-    }
+      ite.weight +
+      Math.abs(ite.row - targetNode.row) +
+      Math.abs(ite.column - targetNode.column);
+    ite.previousNode = currentNode;
+    // }
   }
   return unvisitedNeighbours;
 }

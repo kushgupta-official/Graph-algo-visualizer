@@ -28,11 +28,11 @@ function sortNodesByDistance(unvisitedNodes) {
 
 function updateUnvisitedNeighbours(node, grid) {
   const unvisitedNeighbours = getUnvisitedNeighbours(node, grid);
-  for (const ite of unvisitedNeighbours) {
-    if (ite.distance > node.distance + ite.weight) {
-      ite.distance = node.distance + ite.weight;
-      ite.previousNode = node;
-    }
+  for (let ite of unvisitedNeighbours) {
+    //  if (ite.distance > node.distance + ite.weight) {
+    ite.distance = node.distance + ite.weight;
+    ite.previousNode = node;
+    //  }
   }
   return unvisitedNeighbours;
 }
