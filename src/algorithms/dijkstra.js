@@ -1,9 +1,3 @@
-/*Problems:
-  1. when an operation is going on, no other operation will work
-  2. reset button
-  3. a star algo
-  4. time complexity
-*/
 export function dijkstra(grid, startNode, endNode) {
   const visitedNodeInOrder = [];
   startNode.distance = 0;
@@ -35,8 +29,10 @@ function sortNodesByDistance(unvisitedNodes) {
 function updateUnvisitedNeighbours(node, grid) {
   const unvisitedNeighbours = getUnvisitedNeighbours(node, grid);
   for (const ite of unvisitedNeighbours) {
-    ite.distance = node.distance + 1;
-    ite.previousNode = node;
+    if (ite.distance > node.distance + ite.weight) {
+      ite.distance = node.distance + ite.weight;
+      ite.previousNode = node;
+    }
   }
   return unvisitedNeighbours;
 }

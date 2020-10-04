@@ -35,6 +35,7 @@ class GraphAlgoVisualizer extends Component {
           isStart: row === startNode_Row && column === startNode_Col,
           isEnd: row === endNode_Row && column === endNode_Col,
           distance: Infinity,
+          weight: 0,
           isVisited: false,
           previousNode: null,
           isWall: false,
@@ -52,6 +53,25 @@ class GraphAlgoVisualizer extends Component {
     const newNode = {
       ...node,
       isWall: !node.isWall,
+      weight: 0,
+    };
+    newGrid[row][column] = newNode;
+    return newGrid;
+  };
+
+  getNewGridWithWeights = (row, column) => {
+    const newGrid = this.state.grid.slice();
+    const node = newGrid[row][column];
+    let changeInValue = 0;
+    if (node.weight === 0) {
+      changeInValue = 10;
+    } else {
+      changeInValue = -10;
+    }
+    const newNode = {
+      ...node,
+      isWall: false,
+      weight: node.weight + changeInValue,
     };
     newGrid[row][column] = newNode;
     return newGrid;
@@ -65,7 +85,12 @@ class GraphAlgoVisualizer extends Component {
       )
     ) {
       console.log(row, column, "mouse down");
-      const newGrid = this.getNewGridWithWallToggled(row, column);
+      let newGrid;
+      if (!this.state.addWeights) {
+        newGrid = this.getNewGridWithWallToggled(row, column);
+      } else {
+        newGrid = this.getNewGridWithWeights(row, column);
+      }
       this.setState({ grid: newGrid, isMousePressed: true });
     }
     // if user wants to change positon of start or end node
@@ -104,7 +129,12 @@ class GraphAlgoVisualizer extends Component {
       )
     ) {
       console.log(row, column, "mouse enter");
-      const newGrid = this.getNewGridWithWallToggled(row, column);
+      let newGrid;
+      if (!this.state.addWeights) {
+        newGrid = this.getNewGridWithWallToggled(row, column);
+      } else {
+        newGrid = this.getNewGridWithWeights(row, column);
+      }
       this.setState({ grid: newGrid });
     } else {
       console.log("mouse entered starting or ending");
@@ -236,7 +266,12 @@ class GraphAlgoVisualizer extends Component {
             newGrid[row][column].isWall === true
           )
         ) {
-          document.getElementById(`node-${row}-${column}`).className = "node";
+          if (newGrid[row][column].weight > 0) {
+            document.getElementById(`node-${row}-${column}`).className =
+              "node weight-present";
+          } else {
+            document.getElementById(`node-${row}-${column}`).className = "node";
+          }
         }
       }
     }
@@ -251,6 +286,7 @@ class GraphAlgoVisualizer extends Component {
         newGrid[row][column].isVisited = false;
         newGrid[row][column].previousNode = null;
         newGrid[row][column].isWall = false;
+        newGrid[row][column].weight = 0;
         if (
           !(
             (row === startNode_Row && column === startNode_Col) ||
@@ -315,7 +351,7 @@ class GraphAlgoVisualizer extends Component {
             checked={this.state.addWeights}
             onChange={this.handleCheckboxChange}
           />
-          <span>Label Text</span>
+          <span>Switch to Weights</span>
         </label>
         <div>
           <span className="time">
@@ -339,6 +375,8 @@ class GraphAlgoVisualizer extends Component {
                     isVisited,
                     previousNode,
                     isWall,
+                    weight,
+
                     isMousePressed,
                   } = node;
                   return (
@@ -352,6 +390,7 @@ class GraphAlgoVisualizer extends Component {
                       isVisited={isVisited}
                       previousNode={previousNode}
                       isWall={isWall}
+                      weight={weight}
                       isMousePressed={isMousePressed}
                       onMouseDown={(row, column) =>
                         this.handleMouseDown(row, column)

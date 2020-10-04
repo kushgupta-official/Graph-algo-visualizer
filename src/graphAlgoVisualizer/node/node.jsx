@@ -11,6 +11,8 @@ class Node extends Component {
       str = str + " endNode";
     } else if (this.props.isWall === true) {
       str = str + " wall-true";
+    } else if (this.props.weight > 0) {
+      str = str + " weight-present";
     }
     return str;
   };
@@ -25,6 +27,7 @@ class Node extends Component {
       isVisited,
       previousNode,
       isWall,
+      weight,
       onMouseDown,
       onMouseUp,
       onMouseEnter,
