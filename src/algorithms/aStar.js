@@ -5,6 +5,7 @@ export function aStar(grid, startNode, endNode) {
   startNode.distance =
     Math.abs(startNode.row - endNode.row) +
     Math.abs(startNode.column - endNode.column);
+  // startNode.distance=0;
   const unvisitedNodes = getAllNodes(grid);
   while (!!unvisitedNodes.length) {
     sortNodesByValueF(unvisitedNodes);
@@ -41,27 +42,45 @@ function getAllNodes(grid) {
 function updateUnvisitedNeighbours(currentNode, targetNode, grid) {
   const unvisitedNeighbours = getUnvisitedNeighbours(currentNode, grid);
   const distanceBetweenCurrentAndTarget =
-    currentNode.distance -
-    (Math.abs(currentNode.row - targetNode.row) +
-      Math.abs(currentNode.column - targetNode.column));
+    Math.abs(currentNode.row - targetNode.row) +
+    Math.abs(currentNode.column - targetNode.column);
+  const g_currentNode = currentNode.distance - distanceBetweenCurrentAndTarget;
   for (let ite of unvisitedNeighbours) {
-    // if (
-    //   ite.distance >
-    //   distanceBetweenCurrentAndTarget +
-    //     ite.weight +
-    //     Math.abs(ite.row - targetNode.row) +
-    //     Math.abs(ite.column - targetNode.column)
-    // ) {
-    ite.distance =
-      distanceBetweenCurrentAndTarget +
-      ite.weight +
+    let g_ite = g_currentNode + 1 + ite.weight;
+    let h_ite =
       Math.abs(ite.row - targetNode.row) +
       Math.abs(ite.column - targetNode.column);
+    if (ite.distance > g_ite + h_ite) ite.distance = g_ite + h_ite;
     ite.previousNode = currentNode;
-    // }
   }
   return unvisitedNeighbours;
 }
+
+// function updateUnvisitedNeighbours(currentNode, targetNode, grid) {
+//   const unvisitedNeighbours = getUnvisitedNeighbours(currentNode, grid);
+//   const distanceBetweenCurrentAndTarget =
+//     currentNode.distance -
+//     (Math.abs(currentNode.row - targetNode.row) +
+//       Math.abs(currentNode.column - targetNode.column));
+//   // const distanceBetweenCurrentAndTarget = currentNode.distance;
+//   for (let ite of unvisitedNeighbours) {
+//     if (
+//       ite.distance >
+//       distanceBetweenCurrentAndTarget +
+//         ite.weight +
+//         Math.abs(ite.row - targetNode.row) +
+//         Math.abs(ite.column - targetNode.column)
+//     ) {
+//       ite.distance =
+//         distanceBetweenCurrentAndTarget +
+//         ite.weight +
+//         Math.abs(ite.row - targetNode.row) +
+//         Math.abs(ite.column - targetNode.column);
+//       ite.previousNode = currentNode;
+//     }
+//   }
+//   return unvisitedNeighbours;
+// }
 
 function getUnvisitedNeighbours(currentNode, grid) {
   const unvisitedNeighbours = [];
