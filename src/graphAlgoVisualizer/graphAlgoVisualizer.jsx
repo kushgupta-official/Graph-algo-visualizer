@@ -1,9 +1,18 @@
+// value along path, dfs
 import React, { Component } from "react";
 import Node from "./node/node.jsx";
 import "./graphAlgoVisualizer.css";
-import { dijkstra, getShortestPathDijkstra } from "../algorithms/dijkstra.js";
-import { aStar, getShortestPathAstar } from "../algorithms/aStar.js";
-import { bfs, getPath } from "../algorithms/bfs.js";
+import {
+  dijkstra,
+  getShortestPathDijkstra,
+  getWeightOfShortestPathDijkstra,
+} from "../algorithms/dijkstra.js";
+import {
+  aStar,
+  getShortestPathAstar,
+  getWeightOfShortestPathAstar,
+} from "../algorithms/aStar.js";
+import { bfs, getPath, getWeightOfShortestPathBFS } from "../algorithms/bfs.js";
 
 const total_rows = 20;
 const total_columns = 40;
@@ -19,6 +28,7 @@ class GraphAlgoVisualizer extends Component {
     grid: [],
     isMousePressed: false,
     timeComplexity: 0,
+    pathCost: 0,
     pathLength: 0,
     isMovingStart: false,
     isMovingEnd: false,
@@ -207,10 +217,15 @@ class GraphAlgoVisualizer extends Component {
     //console.log(visitedNodesInOrder);
     const shortestPath = getShortestPathDijkstra(grid, startNode, endNode);
     //console.log(visitedNodesInOrder);
+    const shortestPathCost = getWeightOfShortestPathDijkstra(
+      grid,
+      shortestPath
+    );
     this.animateAlgo(visitedNodesInOrder, shortestPath);
     this.setState({
       timeComplexity: visitedNodesInOrder.length,
       pathLength: shortestPath.length,
+      pathCost: shortestPathCost,
     });
     // toBeDisabled.disabled = false;
     // console.log(shortestPath);
@@ -226,10 +241,12 @@ class GraphAlgoVisualizer extends Component {
     //console.log(visitedNodesInOrder);
     const shortestPath = getShortestPathAstar(grid, startNode, endNode);
     console.log(visitedNodesInOrder);
+    const shortestPathCost = getWeightOfShortestPathAstar(grid, shortestPath);
     this.animateAlgo(visitedNodesInOrder, shortestPath);
     this.setState({
       timeComplexity: visitedNodesInOrder.length,
       pathLength: shortestPath.length,
+      pathCost: shortestPathCost,
     });
     // console.log(shortestPath);
     // console.log(grid);
@@ -245,9 +262,11 @@ class GraphAlgoVisualizer extends Component {
     const path = getPath(grid, startNode, endNode);
     console.log(visitedNodesInOrder);
     this.animateAlgo(visitedNodesInOrder, path);
+    const pathCost = getWeightOfShortestPathBFS(grid, path);
     this.setState({
       timeComplexity: visitedNodesInOrder.length,
       pathLength: path.length,
+      pathCost,
     });
     console.log(path);
     console.log(grid);
@@ -276,7 +295,12 @@ class GraphAlgoVisualizer extends Component {
         }
       }
     }
-    this.setState({ grid: newGrid, timeComplexity: 0, pathLength: 0 });
+    this.setState({
+      grid: newGrid,
+      timeComplexity: 0,
+      pathLength: 0,
+      pathCost: 0,
+    });
   };
 
   undoAlgoAndWalls = () => {
@@ -298,7 +322,12 @@ class GraphAlgoVisualizer extends Component {
         }
       }
     }
-    this.setState({ grid: newGrid, timeComplexity: 0, pathLength: 0 });
+    this.setState({
+      grid: newGrid,
+      timeComplexity: 0,
+      pathLength: 0,
+      pathCost: 0,
+    });
   };
 
   handleCheckboxChange = () => {
@@ -361,6 +390,7 @@ class GraphAlgoVisualizer extends Component {
           <span className="pathLength">
             Path Length = {this.state.pathLength}
           </span>
+          <span className="pathCost">Path Cost = {this.state.pathCost}</span>
         </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {

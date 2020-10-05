@@ -8,8 +8,14 @@
   right: 10%;
 }
 
-.pathLength {
+.pathCost {
   position: absolute;
   font-size: large;
   right: 30%;
+}
+
+.pathLength {
+  position: absolute;
+  font-size: large;
+  right: 50%;
 }

@@ -70,3 +70,15 @@ export function getPath(grid, startNode, endNode) {
   path.reverse();
   return path;
 }
+
+export function getWeightOfShortestPathBFS(grid, path) {
+  let weightOfPath = 0;
+  for (let ite of path) {
+    if (ite.weight === 0) {
+      weightOfPath = weightOfPath + 1;
+    } else {
+      weightOfPath = weightOfPath + ite.weight + 1;
+    }
+  }
+  return weightOfPath;
+}

@@ -78,3 +78,15 @@ export function getShortestPathDijkstra(grid, startNode, endNode) {
   shortestPath.reverse();
   return shortestPath;
 }
+
+export function getWeightOfShortestPathDijkstra(grid, shortestPath) {
+  let weightOfPath = 0;
+  for (let ite of shortestPath) {
+    if (ite.weight === 0) {
+      weightOfPath = weightOfPath + 1;
+    } else {
+      weightOfPath = weightOfPath + ite.weight + 1;
+    }
+  }
+  return weightOfPath;
+}
