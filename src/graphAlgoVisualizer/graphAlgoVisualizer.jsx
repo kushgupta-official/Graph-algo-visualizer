@@ -12,7 +12,12 @@ import {
   getShortestPathAstar,
   getWeightOfShortestPathAstar,
 } from "../algorithms/aStar.js";
-import { bfs, getPath, getWeightOfShortestPathBFS } from "../algorithms/bfs.js";
+import {
+  bfs,
+  getPathBFS,
+  getWeightOfShortestPathBFS,
+} from "../algorithms/bfs.js";
+import { dfs, getPathDFS, getWeightOfPathDFS } from "../algorithms/dfs";
 
 const total_rows = 20;
 const total_columns = 40;
@@ -276,7 +281,7 @@ class GraphAlgoVisualizer extends Component {
     const endNode = grid[endNode_Row][endNode_Col];
     const visitedNodesInOrder = bfs(grid, startNode, endNode);
     //console.log(visitedNodesInOrder);
-    const path = getPath(grid, startNode, endNode);
+    const path = getPathBFS(grid, startNode, endNode);
     console.log(visitedNodesInOrder);
     this.animateAlgo(visitedNodesInOrder, path);
     const pathCost = getWeightOfShortestPathBFS(grid, path);
@@ -288,6 +293,27 @@ class GraphAlgoVisualizer extends Component {
     console.log(path);
     console.log(grid);
   };
+
+  visualizeDFS = () => {
+    this.clearAlgo(); //for clearing grid for any previous algo if implemented
+    const { grid } = this.state;
+    const startNode = grid[startNode_Row][startNode_Col];
+    const endNode = grid[endNode_Row][endNode_Col];
+    const visitedNodesInOrder = dfs(grid, startNode, endNode);
+    console.log(visitedNodesInOrder);
+    const path = getPathDFS(grid, startNode, endNode);
+    console.log(visitedNodesInOrder);
+    this.animateAlgo(visitedNodesInOrder, path);
+    const pathCost = getWeightOfPathDFS(grid, path);
+    this.setState({
+      timeComplexity: visitedNodesInOrder.length,
+      pathLength: path.length,
+      pathCost,
+    });
+    console.log(path);
+    console.log(grid);
+  };
+
   //clear visitedNodes and shortestPath properties from the grid leaving walls and weights untouched
   clearAlgo = () => {
     const newGrid = this.state.grid;
@@ -371,6 +397,13 @@ class GraphAlgoVisualizer extends Component {
           onClick={this.visualizeAstar}
         >
           Visualize A* Algorithm
+        </button>
+        <button
+          className="btn btn-primary btn-lg"
+          id="function"
+          onClick={this.visualizeDFS}
+        >
+          Depth First Search
         </button>
         <button
           className="btn btn-primary btn-lg"

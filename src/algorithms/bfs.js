@@ -57,7 +57,7 @@ function getNeighboursOfCurrentNode(grid, currNode) {
 //     return toReturn;
 // }
 
-export function getPath(grid, startNode, endNode) {
+export function getPathBFS(grid, startNode, endNode) {
   const path = [];
   let previous = endNode.previousNode;
   if (previous === null) {
