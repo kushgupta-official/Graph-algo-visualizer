@@ -67,6 +67,22 @@
   }
 }
 
+.weight-present-path {
+  background-color: lightgreen;
+  background-image: url("./weight.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.weight-present-visited {
+  background-color: lightblue;
+  background-image: url("./weight.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
 .weight-present {
   /* background-color: black; */
   background-image: url("./weight.svg");

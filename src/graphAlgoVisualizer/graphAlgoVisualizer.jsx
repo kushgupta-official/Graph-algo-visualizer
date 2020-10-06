@@ -191,17 +191,34 @@ class GraphAlgoVisualizer extends Component {
           setTimeout(() => {
             setTimeout(() => {
               const node = shortestPath[j];
-              document.getElementById(
-                `node-${node.row}-${node.column}`
-              ).className = "node node-shortestPath";
+              if (
+                document.getElementById(`node-${node.row}-${node.column}`)
+                  .className === "node weight-present-visited"
+              ) {
+                document.getElementById(
+                  `node-${node.row}-${node.column}`
+                ).className = "node weight-present-path";
+              } else {
+                document.getElementById(
+                  `node-${node.row}-${node.column}`
+                ).className = "node node-shortestPath";
+              }
             }, 50 * j);
           }, 25 * i);
         return;
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
-        document.getElementById(`node-${node.row}-${node.column}`).className =
-          "node node-visited";
+        if (
+          document.getElementById(`node-${node.row}-${node.column}`)
+            .className === "node weight-present"
+        ) {
+          document.getElementById(`node-${node.row}-${node.column}`).className =
+            "node weight-present-visited";
+        } else {
+          document.getElementById(`node-${node.row}-${node.column}`).className =
+            "node node-visited";
+        }
       }, 25 * i);
     }
   };
