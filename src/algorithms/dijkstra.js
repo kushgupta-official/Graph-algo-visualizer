@@ -6,13 +6,14 @@ export function dijkstra(grid, startNode, endNode) {
   while (!!unvisitedNodes.length) {
     sortNodesByDistance(unvisitedNodes);
     const nearestNode = unvisitedNodes.shift();
+    nearestNode.isVisited = true;
     if (nearestNode.distance === Infinity) {
       return visitedNodeInOrder;
     }
     if (nearestNode.isWall === true) {
       continue;
     }
-    nearestNode.isVisited = true;
+    // nearestNode.isVisited = true;
     visitedNodeInOrder.push(nearestNode);
     if (nearestNode === endNode) {
       return visitedNodeInOrder;
@@ -29,10 +30,10 @@ function sortNodesByDistance(unvisitedNodes) {
 function updateUnvisitedNeighbours(node, grid) {
   const unvisitedNeighbours = getUnvisitedNeighbours(node, grid);
   for (let ite of unvisitedNeighbours) {
-    //  if (ite.distance > node.distance + ite.weight) {
-    ite.distance = node.distance + ite.weight;
-    ite.previousNode = node;
-    //  }
+    if (ite.distance > node.distance + ite.weight) {
+      ite.distance = node.distance + ite.weight + 1;
+      ite.previousNode = node;
+    }
   }
   return unvisitedNeighbours;
 }
