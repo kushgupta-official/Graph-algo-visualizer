@@ -1,6 +1,7 @@
 // value along path, dfs
 import React, { Component } from "react";
 import Node from "./node/node.jsx";
+import Navbar from "./navbar";
 import "./graphAlgoVisualizer.css";
 import {
   dijkstra,
@@ -38,6 +39,7 @@ class GraphAlgoVisualizer extends Component {
     isMovingStart: false,
     isMovingEnd: false,
     addWeights: false,
+    processActive: false,
   };
 
   componentDidMount() {
@@ -190,9 +192,10 @@ class GraphAlgoVisualizer extends Component {
   };
 
   animateAlgo = (visitedNodesInOrder, shortestPath) => {
+    document.getElementById("function").disabled = true;
     for (let i = 1; i < visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length - 1) {
-        for (let j = 0; j < shortestPath.length; j++)
+        for (let j = 0; j < shortestPath.length; j++) {
           setTimeout(() => {
             setTimeout(() => {
               const node = shortestPath[j];
@@ -210,6 +213,14 @@ class GraphAlgoVisualizer extends Component {
               }
             }, 50 * j);
           }, 25 * i);
+        }
+        //Finally the solution to bug
+        setTimeout(() => {
+          setTimeout(() => {
+            console.log("ho jayega");
+            document.getElementById("function").disabled = false;
+          }, 50 * shortestPath.length);
+        }, 25 * visitedNodesInOrder.length);
         return;
       }
       setTimeout(() => {
@@ -384,30 +395,32 @@ class GraphAlgoVisualizer extends Component {
     //  console.log(grid);
     return (
       <div className="container-fluid">
+        {/* <div>
+         <Navbar /> */}
         <button
           className="btn btn-primary btn-lg"
-          id="function"
+          id="dijkstra-btn"
           onClick={this.visualizeDijkstra}
         >
           Visualize Dijkstra Algorithm
         </button>
         <button
           className="btn btn-primary btn-lg"
-          id="function"
+          id="astar-btn"
           onClick={this.visualizeAstar}
         >
           Visualize A* Algorithm
         </button>
         <button
           className="btn btn-primary btn-lg"
-          id="function"
+          id="dfs-btn"
           onClick={this.visualizeDFS}
         >
           Depth First Search
         </button>
         <button
           className="btn btn-primary btn-lg"
-          id="function"
+          id="bfs-btn"
           onClick={this.visualizeBFS}
         >
           Breadth First Search
