@@ -1,4 +1,3 @@
-// value along path, dfs
 import React, { Component } from "react";
 import Node from "./node/node.jsx";
 import Navbar from "./navbar";
@@ -28,7 +27,7 @@ var endNode_Row = 10;
 var endNode_Col = 37;
 const FixedWeight = 10;
 
-const Checkbox = (props) => <input type="checkbox" {...props} />;
+// const Checkbox = (props) => <input type="checkbox" {...props} />;
 class GraphAlgoVisualizer extends Component {
   state = {
     grid: [],
@@ -357,6 +356,7 @@ class GraphAlgoVisualizer extends Component {
     });
   };
 
+  //clear whole grid
   undoAlgoAndWalls = () => {
     const newGrid = this.state.grid;
     for (let row = 0; row < total_rows; row++) {
@@ -397,12 +397,14 @@ class GraphAlgoVisualizer extends Component {
       // <div className="container-fluid">
       <div>
         <Navbar
+          addWeights={this.state.addWeights}
           handleDijkstra={this.visualizeDijkstra}
           handleAstar={this.visualizeAstar}
           handleBFS={this.visualizeBFS}
           handleDFS={this.visualizeDFS}
           handleClearAlgorithm={this.clearAlgo}
           handleClearGrid={this.undoAlgoAndWalls}
+          handleCheckboxChange={this.handleCheckboxChange}
         ></Navbar>
         {/* <button
           className="btn btn-primary btn-lg"
@@ -446,13 +448,16 @@ class GraphAlgoVisualizer extends Component {
         >
           Clear Algo
         </button> */}
-        <label>
+
+        {/*CheckBox*/}
+
+        {/* <label>
           <Checkbox
             checked={this.state.addWeights}
             onChange={this.handleCheckboxChange}
           />
           <span>Switch to Weights</span>
-        </label>
+        </label> */}
         <div>
           <span className="time">
             Time Complexity = {this.state.timeComplexity}

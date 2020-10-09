@@ -3,10 +3,14 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
+import "./graphAlgoVisualizer.css";
+
+const Checkbox = (props) => <input type="checkbox" {...props} />;
 
 class classNavbar extends Component {
   state = {
     currentAlgo: "null",
+    addWeights: "false",
   };
   forDijkstra = () => {
     this.setState({ currentAlgo: "Dijkstra" });
@@ -31,8 +35,18 @@ class classNavbar extends Component {
       this.props.handleDFS();
     }
   };
+  handleCheckboxChange = () => {
+    console.log(this.state.addWeights);
+    this.setState({ addWeights: !this.state.addWeights });
+    console.log(this.state.addWeights, "hi");
+  };
   render() {
-    const { handleClearAlgorithm, handleClearGrid } = this.props;
+    const {
+      handleClearAlgorithm,
+      handleClearGrid,
+      addWeights,
+      handleCheckboxChange,
+    } = this.props;
     return (
       <Navbar bg="dark" variant="dark" expand="lg">
         <Navbar.Brand className="mr-5">Graph Algo Visualizer</Navbar.Brand>
@@ -72,6 +86,10 @@ class classNavbar extends Component {
             <Button variant="info" className="mx-5" onClick={handleClearGrid}>
               Clear Grid
             </Button>
+            <label>
+              <Checkbox checked={addWeights} onChange={handleCheckboxChange} />
+              <span className="checkBox">Switch to Weights</span>
+            </label>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
