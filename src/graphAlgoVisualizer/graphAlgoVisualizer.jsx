@@ -192,7 +192,7 @@ class GraphAlgoVisualizer extends Component {
   };
 
   animateAlgo = (visitedNodesInOrder, shortestPath) => {
-    document.getElementById("function").disabled = true;
+    // document.getElementById("function").disabled = true;
     for (let i = 1; i < visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length - 1) {
         for (let j = 0; j < shortestPath.length; j++) {
@@ -215,12 +215,12 @@ class GraphAlgoVisualizer extends Component {
           }, 25 * i);
         }
         //Finally the solution to bug
-        setTimeout(() => {
-          setTimeout(() => {
-            console.log("ho jayega");
-            document.getElementById("function").disabled = false;
-          }, 50 * shortestPath.length);
-        }, 25 * visitedNodesInOrder.length);
+        // setTimeout(() => {
+        //   setTimeout(() => {
+        //     console.log("ho jayega");
+        //     document.getElementById("function").disabled = false;
+        //   }, 50 * shortestPath.length);
+        // }, 25 * visitedNodesInOrder.length);
         return;
       }
       setTimeout(() => {
@@ -394,10 +394,17 @@ class GraphAlgoVisualizer extends Component {
     const { grid } = this.state;
     //  console.log(grid);
     return (
-      <div className="container-fluid">
-        {/* <div>
-         <Navbar /> */}
-        <button
+      // <div className="container-fluid">
+      <div>
+        <Navbar
+          handleDijkstra={this.visualizeDijkstra}
+          handleAstar={this.visualizeAstar}
+          handleBFS={this.visualizeBFS}
+          handleDFS={this.visualizeDFS}
+          handleClearAlgorithm={this.clearAlgo}
+          handleClearGrid={this.undoAlgoAndWalls}
+        ></Navbar>
+        {/* <button
           className="btn btn-primary btn-lg"
           id="dijkstra-btn"
           onClick={this.visualizeDijkstra}
@@ -438,7 +445,7 @@ class GraphAlgoVisualizer extends Component {
           onClick={this.clearAlgo}
         >
           Clear Algo
-        </button>
+        </button> */}
         <label>
           <Checkbox
             checked={this.state.addWeights}
@@ -470,7 +477,6 @@ class GraphAlgoVisualizer extends Component {
                     previousNode,
                     isWall,
                     weight,
-
                     isMousePressed,
                   } = node;
                   return (
