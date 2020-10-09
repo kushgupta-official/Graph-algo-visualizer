@@ -95,6 +95,9 @@ class GraphAlgoVisualizer extends Component {
   };
 
   handleMouseDown = (row, column) => {
+    if (this.state.processActive === true) {
+      return;
+    }
     if (
       !(
         (row === startNode_Row && column === startNode_Col) ||
@@ -159,6 +162,9 @@ class GraphAlgoVisualizer extends Component {
   };
 
   handleMouseUp = (row, column) => {
+    if (this.state.processActive === true) {
+      return;
+    }
     console.log("mouse up");
     this.setState({ isMousePressed: false });
 
@@ -191,7 +197,10 @@ class GraphAlgoVisualizer extends Component {
   };
 
   animateAlgo = (visitedNodesInOrder, shortestPath) => {
-    // document.getElementById("function").disabled = true;
+    this.setState({ processActive: true });
+    document.getElementById("visualize").disabled = true;
+    document.getElementById("clearAlgo").disabled = true;
+    document.getElementById("clearGrid").disabled = true;
     for (let i = 1; i < visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length - 1) {
         for (let j = 0; j < shortestPath.length; j++) {
@@ -213,13 +222,16 @@ class GraphAlgoVisualizer extends Component {
             }, 50 * j);
           }, 25 * i);
         }
-        //Finally the solution to bug
-        // setTimeout(() => {
-        //   setTimeout(() => {
-        //     console.log("ho jayega");
-        //     document.getElementById("function").disabled = false;
-        //   }, 50 * shortestPath.length);
-        // }, 25 * visitedNodesInOrder.length);
+        // Finally the solution to bug
+        setTimeout(() => {
+          setTimeout(() => {
+            console.log("ho gya");
+            this.setState({ processActive: false });
+            document.getElementById("visualize").disabled = false;
+            document.getElementById("clearAlgo").disabled = false;
+            document.getElementById("clearGrid").disabled = false;
+          }, 50 * shortestPath.length);
+        }, 25 * visitedNodesInOrder.length);
         return;
       }
       setTimeout(() => {
@@ -405,59 +417,8 @@ class GraphAlgoVisualizer extends Component {
           handleClearAlgorithm={this.clearAlgo}
           handleClearGrid={this.undoAlgoAndWalls}
           handleCheckboxChange={this.handleCheckboxChange}
+          processActive={this.state.processActive}
         ></Navbar>
-        {/* <button
-          className="btn btn-primary btn-lg"
-          id="dijkstra-btn"
-          onClick={this.visualizeDijkstra}
-        >
-          Visualize Dijkstra Algorithm
-        </button>
-        <button
-          className="btn btn-primary btn-lg"
-          id="astar-btn"
-          onClick={this.visualizeAstar}
-        >
-          Visualize A* Algorithm
-        </button>
-        <button
-          className="btn btn-primary btn-lg"
-          id="dfs-btn"
-          onClick={this.visualizeDFS}
-        >
-          Depth First Search
-        </button>
-        <button
-          className="btn btn-primary btn-lg"
-          id="bfs-btn"
-          onClick={this.visualizeBFS}
-        >
-          Breadth First Search
-        </button>
-        <button
-          className="btn btn-primary btn-lg"
-          id="function"
-          onClick={this.undoAlgoAndWalls}
-        >
-          Undo Algo and walls
-        </button>
-        <button
-          className="btn btn-primary btn-lg"
-          id="function"
-          onClick={this.clearAlgo}
-        >
-          Clear Algo
-        </button> */}
-
-        {/*CheckBox*/}
-
-        {/* <label>
-          <Checkbox
-            checked={this.state.addWeights}
-            onChange={this.handleCheckboxChange}
-          />
-          <span>Switch to Weights</span>
-        </label> */}
         <div>
           <span className="time">
             Time Complexity = {this.state.timeComplexity}

@@ -73,17 +73,28 @@ class classNavbar extends Component {
                 Separated link
               </NavDropdown.Item> */}
             </NavDropdown>
-            <Button variant="success" className="mx-5" onClick={this.visualize}>
+            <Button
+              variant="success"
+              className="mx-5"
+              onClick={this.visualize}
+              id="visualize"
+            >
               Visualize!
             </Button>
             <Button
               variant="info"
               className="mx-5"
+              id="clearAlgo"
               onClick={handleClearAlgorithm}
             >
               Clear Algorithm
             </Button>
-            <Button variant="info" className="mx-5" onClick={handleClearGrid}>
+            <Button
+              variant="info"
+              className="mx-5"
+              onClick={handleClearGrid}
+              id="clearGrid"
+            >
               Clear Grid
             </Button>
             <label>
