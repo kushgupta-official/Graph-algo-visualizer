@@ -18,8 +18,9 @@ import {
   getWeightOfShortestPathBFS,
 } from "../algorithms/bfs.js";
 import { dfs, getPathDFS, getWeightOfPathDFS } from "../algorithms/dfs";
+import "./node/node.css";
 
-const total_rows = 20;
+const total_rows = 19;
 const total_columns = 40;
 var startNode_Row = 5;
 var startNode_Col = 10;
@@ -27,7 +28,6 @@ var endNode_Row = 10;
 var endNode_Col = 37;
 const FixedWeight = 10;
 
-// const Checkbox = (props) => <input type="checkbox" {...props} />;
 class GraphAlgoVisualizer extends Component {
   state = {
     grid: [],
@@ -438,6 +438,15 @@ class GraphAlgoVisualizer extends Component {
           pathCost={this.state.pathCost}
           pathLength={this.state.pathLength}
         ></Navbar>
+        <div className="labels mt-3">
+          <li className="node startNode ml-5"></li>  Start node
+          <li className="node endNode ml-5"></li>  End Node
+          <li className="node node-visited ml-5"></li>  Visited node
+          <li className="node node-shortestPath ml-5"></li>  Path Node
+          <li className="node wall-true ml-5"></li>  Obstacle Node
+          <li className="node weight-present ml-5"></li>  Weight Node
+          <li className="node ml-5"></li>  Unvisited Node
+        </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
@@ -483,6 +492,11 @@ class GraphAlgoVisualizer extends Component {
               </div>
             );
           })}
+        </div>
+        {/* <Footer/> */}
+        <div className="footer">
+          <p>Created by Kush Gupta <span role="img" aria-label="owl">🦉 Hosted on <a href="https://github.com/kushgupta-official/Graph-algo-visualizer">GitHub</a></span> 
+          </p>
         </div>
       </div>
     );
