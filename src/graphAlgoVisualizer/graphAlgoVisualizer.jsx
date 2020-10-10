@@ -141,7 +141,23 @@ class GraphAlgoVisualizer extends Component {
 
   handleMouseEnter = (row, column) => {
     if (!this.state.isMousePressed) return;
-    if (this.state.isMovingStart || this.state.isMovingEnd) return;
+  //  if (this.state.isMovingStart || this.state.isMovingEnd) return;
+    if (this.state.isMovingStart){
+      const newGrid=this.state.grid;
+      newGrid[startNode_Row][startNode_Col].isStart=false;
+      newGrid[row][column].isStart=true;
+      startNode_Row=row;
+      startNode_Col=column;
+      this.setState({grid:newGrid});
+    }
+    else if (this.state.isMovingEnd){
+      const newGrid=this.state.grid;
+      newGrid[endNode_Row][endNode_Col].isEnd=false;
+      newGrid[row][column].isEnd=true;
+      endNode_Row=row;
+      endNode_Col=column;
+      this.setState({grid:newGrid});
+    }
     if (
       !(
         (row === startNode_Row && column === startNode_Col) ||
