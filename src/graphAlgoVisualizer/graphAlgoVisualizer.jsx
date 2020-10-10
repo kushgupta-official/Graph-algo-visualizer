@@ -21,7 +21,7 @@ import { dfs, getPathDFS, getWeightOfPathDFS } from "../algorithms/dfs";
 import "./node/node.css";
 
 const total_rows = 19;
-const total_columns = 40;
+const total_columns = 45;
 var startNode_Row = 5;
 var startNode_Col = 10;
 var endNode_Row = 10;
@@ -39,6 +39,7 @@ class GraphAlgoVisualizer extends Component {
     isMovingEnd: false,
     addWeights: false,
     processActive: false,
+    description: "Select an Algorithm",
   };
 
   componentDidMount() {
@@ -418,6 +419,21 @@ class GraphAlgoVisualizer extends Component {
     console.log(this.state.addWeights, "hi");
   };
 
+  getDescription=(algo)=>{
+    if (algo==="Dijkstra"){
+      this.setState({description:"Dijkstra's Algorithm ensures Shortest Path between 2 Nodes in any Weighted Graph"});
+    }
+    else if (algo==="Astar"){
+      this.setState({description:"A* Search Algorithm is an AI based Algorithm ensuring Shortest Path between 2 Nodes in any Weighted Graph in very less Time"});
+    }
+    else if (algo==="BFS"){
+      this.setState({description:"Breadth First Search ensures Shortest Path between 2 nodes in an Unweighted Graph"});
+    }
+    else if (algo==="DFS"){
+      this.setState({description:"Depth First Search does not ensures the Shortest Path"});
+    }
+  }
+
   render() {
     const { grid } = this.state;
     //  console.log(grid);
@@ -437,6 +453,7 @@ class GraphAlgoVisualizer extends Component {
           timeComplexity={this.state.timeComplexity}
           pathCost={this.state.pathCost}
           pathLength={this.state.pathLength}
+          handleDescription={(algo)=>this.getDescription(algo)}
         ></Navbar>
         <div className="labels mt-3">
           <li className="node startNode ml-5"></li>  Start node
@@ -447,23 +464,16 @@ class GraphAlgoVisualizer extends Component {
           <li className="node weight-present ml-5"></li>  Weight Node
           <li className="node ml-5"></li>  Unvisited Node
         </div>
+
+        <div className="description mt-3">
+          {this.state.description}
+        </div>
+        
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
               <div key={rowIdx}>
                 {row.map((node, nodeIdx) => {
-                  // const {
-                  //   row,
-                  //   column,
-                  //   isStart,
-                  //   isEnd,
-                  //   distance,
-                  //   isVisited,
-                  //   previousNode,
-                  //   isWall,
-                  //   weight,
-                  //   isMousePressed,
-                  // } = node;
                   return (
                     <Node
                       key={nodeIdx}

@@ -1,5 +1,5 @@
 .node {
-  width: 2.5%;
+  width: 2.22%;
   height: 30px;
   outline: 1px solid gray;
   display: inline-block;
@@ -35,10 +35,10 @@
 
 @keyframes path {
   from {
-    background-color: darkgreen;
+    background-color: yellowgreen;
   }
   to {
-    background-color: lightgreen;
+    background-color: yellow;
   }
 }
 

@@ -1,9 +1,6 @@
 .grid {
   /* margin: 30px 100px 100px; */
   margin-top: 10px;
-  margin-left: 100px;
-  margin-right: 100px;
-  margin-bottom: 10px;
   /* margin-top: 2%; */
 }
 
@@ -38,6 +35,13 @@
   background-color: #343a40;
   color: white;
   text-align: center;
+}
+
+.description {
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+  color: darkblue;
 }
 
 .labels {

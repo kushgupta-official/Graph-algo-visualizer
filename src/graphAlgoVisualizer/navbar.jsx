@@ -14,15 +14,19 @@ class classNavbar extends Component {
   };
   forDijkstra = () => {
     this.setState({ currentAlgo: "Dijkstra" });
+    this.props.handleDescription("Dijkstra");
   };
   forAstar = () => {
     this.setState({ currentAlgo: "Astar" });
+    this.props.handleDescription("Astar");
   };
   forBFS = () => {
     this.setState({ currentAlgo: "BFS" });
+    this.props.handleDescription("BFS");
   };
   forDFS = () => {
     this.setState({ currentAlgo: "DFS" });
+    this.props.handleDescription("DFS");
   };
   visualize = () => {
     if (this.state.currentAlgo === "Dijkstra") {
