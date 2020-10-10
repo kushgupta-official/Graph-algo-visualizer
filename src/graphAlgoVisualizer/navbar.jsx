@@ -46,10 +46,13 @@ class classNavbar extends Component {
       handleClearGrid,
       addWeights,
       handleCheckboxChange,
+      timeComplexity,
+      pathLength,
+      pathCost,
     } = this.props;
     return (
       <Navbar bg="dark" variant="dark" expand="lg">
-        <Navbar.Brand className="mr-5">Graph Algo Visualizer</Navbar.Brand>
+        <Navbar.Brand className="mr-4">Graph Algo Visualizer</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
@@ -75,7 +78,7 @@ class classNavbar extends Component {
             </NavDropdown>
             <Button
               variant="success"
-              className="mx-5"
+              className="mx-4"
               onClick={this.visualize}
               id="visualize"
             >
@@ -83,7 +86,7 @@ class classNavbar extends Component {
             </Button>
             <Button
               variant="info"
-              className="mx-5"
+              className="mx-4"
               id="clearAlgo"
               onClick={handleClearAlgorithm}
             >
@@ -91,16 +94,19 @@ class classNavbar extends Component {
             </Button>
             <Button
               variant="info"
-              className="mx-5"
+              className="mx-4"
               onClick={handleClearGrid}
               id="clearGrid"
             >
               Clear Grid
             </Button>
-            <label>
+            <label className="mx-3">
               <Checkbox checked={addWeights} onChange={handleCheckboxChange} />
               <span className="checkBox">Switch to Weights</span>
             </label>
+            <label className="checkBox mx-3">Path Length : {pathLength}</label>
+            <label className="checkBox mx-3">Path Cost : {pathCost}</label>
+            <label className="checkBox mx-3">Time Complexity : {timeComplexity}</label>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

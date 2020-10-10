@@ -434,46 +434,40 @@ class GraphAlgoVisualizer extends Component {
           handleClearGrid={this.undoAlgoAndWalls}
           handleCheckboxChange={this.handleCheckboxChange}
           processActive={this.state.processActive}
+          timeComplexity={this.state.timeComplexity}
+          pathCost={this.state.pathCost}
+          pathLength={this.state.pathLength}
         ></Navbar>
-        <div>
-          <span className="time">
-            Time Complexity = {this.state.timeComplexity}
-          </span>
-          <span className="pathLength">
-            Path Length = {this.state.pathLength}
-          </span>
-          <span className="pathCost">Path Cost = {this.state.pathCost}</span>
-        </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
               <div key={rowIdx}>
                 {row.map((node, nodeIdx) => {
-                  const {
-                    row,
-                    column,
-                    isStart,
-                    isEnd,
-                    distance,
-                    isVisited,
-                    previousNode,
-                    isWall,
-                    weight,
-                    isMousePressed,
-                  } = node;
+                  // const {
+                  //   row,
+                  //   column,
+                  //   isStart,
+                  //   isEnd,
+                  //   distance,
+                  //   isVisited,
+                  //   previousNode,
+                  //   isWall,
+                  //   weight,
+                  //   isMousePressed,
+                  // } = node;
                   return (
                     <Node
                       key={nodeIdx}
-                      row={row}
-                      column={column}
-                      isStart={isStart}
-                      isEnd={isEnd}
-                      distance={distance}
-                      isVisited={isVisited}
-                      previousNode={previousNode}
-                      isWall={isWall}
-                      weight={weight}
-                      isMousePressed={isMousePressed}
+                      row={node.row}
+                      column={node.column}
+                      isStart={node.isStart}
+                      isEnd={node.isEnd}
+                      distance={node.distance}
+                      isVisited={node.isVisited}
+                      previousNode={node.previousNode}
+                      isWall={node.isWall}
+                      weight={node.weight}
+                      // isMousePressed={isMousePressed}
                       onMouseDown={(row, column) =>
                         this.handleMouseDown(row, column)
                       }
