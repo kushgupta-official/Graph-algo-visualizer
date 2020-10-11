@@ -20,7 +20,7 @@ import {
 import { dfs, getPathDFS, getWeightOfPathDFS } from "../algorithms/dfs";
 import "./node/node.css";
 
-const total_rows = 19;
+const total_rows = 18;
 const total_columns = 45;
 var startNode_Row = 5;
 var startNode_Col = 10;
@@ -39,7 +39,7 @@ class GraphAlgoVisualizer extends Component {
     isMovingEnd: false,
     addWeights: false,
     processActive: false,
-    description: "Select an Algorithm",
+    description: "Select an Algorithm. Dragging on the Nodes creates Walls/Weights",
   };
 
   componentDidMount() {
@@ -421,16 +421,16 @@ class GraphAlgoVisualizer extends Component {
 
   getDescription=(algo)=>{
     if (algo==="Dijkstra"){
-      this.setState({description:"Dijkstra's Algorithm ensures Shortest Path between 2 Nodes in any Weighted Graph"});
+      this.setState({description:"Dijkstra's Algorithm is Weighted and guarantees the Shortest Path!"});
     }
     else if (algo==="Astar"){
-      this.setState({description:"A* Search Algorithm is an AI based Algorithm ensuring Shortest Path between 2 Nodes in any Weighted Graph in very less Time"});
+      this.setState({description:"A* Search (AI based Algorithm )is Weighted and guarantees the Shortest Path!"});
     }
     else if (algo==="BFS"){
-      this.setState({description:"Breadth First Search ensures Shortest Path between 2 nodes in an Unweighted Graph"});
+      this.setState({description:"Breath-first Search is Unweighted and guarantees the Shortest Path!"});
     }
     else if (algo==="DFS"){
-      this.setState({description:"Depth First Search does not ensures the Shortest Path"});
+      this.setState({description:"Depth-first Search is Unweighted and does not guarantee the Shortest path!"});
     }
   }
 
@@ -505,7 +505,7 @@ class GraphAlgoVisualizer extends Component {
         </div>
         {/* <Footer/> */}
         <div className="footer">
-          <p>Created by Kush Gupta <span role="img" aria-label="owl">🦉 Hosted on <a href="https://github.com/kushgupta-official/Graph-algo-visualizer">GitHub</a></span> 
+          <p>Created by Kush Gupta <span role="img" aria-label="owl">🦉 Hosted on <a href="https://github.com/kushgupta-official/Graph-algo-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a></span> 
           </p>
         </div>
       </div>

@@ -20,7 +20,9 @@ export function dfs(grid, startNode, endNode) {
 function pushNeighboursOfNode(grid, stack, node) {
   const neighboursOfNode = getNeighboursOfNode(grid, node);
   for (let ite of neighboursOfNode) {
-    ite.previousNode = node;
+    if (ite.previousNode!==null){
+      ite.previousNode = node;
+    }
     ite.isVisited = true;
     stack.push(ite);
   }
