@@ -55,7 +55,7 @@ class classNavbar extends Component {
       pathCost,
     } = this.props;
     return (
-      <Navbar bg="dark" variant="dark" expand="lg">
+      <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
         <Navbar.Brand className="mr-4">Graph Algo Visualizer</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

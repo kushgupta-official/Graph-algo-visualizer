@@ -242,7 +242,6 @@ class GraphAlgoVisualizer extends Component {
         // Finally the solution to bug
         setTimeout(() => {
           setTimeout(() => {
-            console.log("ho gya");
             this.setState({ processActive: false });
             document.getElementById("visualize").disabled = false;
             document.getElementById("clearAlgo").disabled = false;
@@ -301,7 +300,7 @@ class GraphAlgoVisualizer extends Component {
     const visitedNodesInOrder = aStar(grid, startNode, endNode);
     //console.log(visitedNodesInOrder);
     const shortestPath = getShortestPathAstar(grid, startNode, endNode);
-    console.log(visitedNodesInOrder);
+    //console.log(visitedNodesInOrder);
     const shortestPathCost = getWeightOfShortestPathAstar(grid, shortestPath);
     this.animateAlgo(visitedNodesInOrder, shortestPath);
     this.setState({
@@ -321,7 +320,7 @@ class GraphAlgoVisualizer extends Component {
     const visitedNodesInOrder = bfs(grid, startNode, endNode);
     //console.log(visitedNodesInOrder);
     const path = getPathBFS(grid, startNode, endNode);
-    console.log(visitedNodesInOrder);
+    //console.log(visitedNodesInOrder);
     this.animateAlgo(visitedNodesInOrder, path);
     const pathCost = getWeightOfShortestPathBFS(grid, path);
     this.setState({
@@ -329,8 +328,8 @@ class GraphAlgoVisualizer extends Component {
       pathLength: path.length,
       pathCost,
     });
-    console.log(path);
-    console.log(grid);
+    //console.log(path);
+    //console.log(grid);
   };
 
   visualizeDFS = () => {
@@ -339,9 +338,9 @@ class GraphAlgoVisualizer extends Component {
     const startNode = grid[startNode_Row][startNode_Col];
     const endNode = grid[endNode_Row][endNode_Col];
     const visitedNodesInOrder = dfs(grid, startNode, endNode);
-    console.log(visitedNodesInOrder);
+    //console.log(visitedNodesInOrder);
     const path = getPathDFS(grid, startNode, endNode);
-    console.log(visitedNodesInOrder);
+    //console.log(visitedNodesInOrder);
     this.animateAlgo(visitedNodesInOrder, path);
     const pathCost = getWeightOfPathDFS(grid, path);
     this.setState({
@@ -349,8 +348,8 @@ class GraphAlgoVisualizer extends Component {
       pathLength: path.length,
       pathCost,
     });
-    console.log(path);
-    console.log(grid);
+    //console.log(path);
+    //console.log(grid);
   };
 
   //clear visitedNodes and shortestPath properties from the grid leaving walls and weights untouched
@@ -414,9 +413,9 @@ class GraphAlgoVisualizer extends Component {
   };
 
   handleCheckboxChange = () => {
-    console.log(this.state.addWeights);
+    //console.log(this.state.addWeights);
     this.setState({ addWeights: !this.state.addWeights });
-    console.log(this.state.addWeights, "hi");
+   // console.log(this.state.addWeights, "hi");
   };
 
   getDescription=(algo)=>{
@@ -424,7 +423,7 @@ class GraphAlgoVisualizer extends Component {
       this.setState({description:"Dijkstra's Algorithm is Weighted and guarantees the Shortest Path!"});
     }
     else if (algo==="Astar"){
-      this.setState({description:"A* Search (AI based Algorithm )is Weighted and guarantees the Shortest Path!"});
+      this.setState({description:"A* Search (AI based Algorithm) is Weighted and guarantees the Shortest Path!"});
     }
     else if (algo==="BFS"){
       this.setState({description:"Breath-first Search is Unweighted and guarantees the Shortest Path!"});
@@ -504,7 +503,7 @@ class GraphAlgoVisualizer extends Component {
           })}
         </div>
         {/* <Footer/> */}
-        <div className="footer">
+        <div className="footer mt-2">
           <p>Created by Kush Gupta <span role="img" aria-label="owl">🦉 Hosted on <a href="https://github.com/kushgupta-official/Graph-algo-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a></span> 
           </p>
         </div>

@@ -1,9 +1,13 @@
 .node {
   width: 2.22%;
   height: 30px;
+  /* height: 5%; */
+  /* height: auto; */
+  vertical-align: top;
   outline: 1px solid gray;
   display: inline-block;
-  margin-top: -4px;
+  /* margin-top: -4px; */
+  /* margin-top: -10%; */
 }
 
 .node-visited {

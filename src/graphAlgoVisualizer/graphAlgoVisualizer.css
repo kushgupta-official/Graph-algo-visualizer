@@ -1,6 +1,8 @@
 .grid {
   /* margin: 30px 100px 100px; */
   margin-top: 10px;
+  /* height: 100%; */
+  /* width: 100%; */
   /* margin-top: 2%; */
 }
 
@@ -28,7 +30,7 @@
 }
 
 .footer {
-  position: fixed;
+  /* position: fixed; */
   left: 0;
   bottom: 0;
   width: 100%;
