@@ -2,7 +2,7 @@
 
 <h1 align="center">Graph Algo Visualizer</h1> -->
 
-# Graph Algo Visualizer [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![NPM version](https://badge.fury.io/js/your-project-name.svg)](http://badge.fury.io/js/your-project-name)
+# Graph Algo Visualizer [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![NPM version](https://badge.fury.io/js/graph-algo-visualizer.svg)](http://badge.fury.io/js/graph-algo-visualizer)
 
 
 
