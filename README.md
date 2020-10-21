@@ -2,7 +2,9 @@
 
 <h1 align="center">Graph Algo Visualizer</h1> -->
 
-# Graph Algo Visualizer
+# Graph Algo Visualizer [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+
+
 
 ## Hosted on https://kushgupta-official.github.io/Graph-algo-visualizer/
 
