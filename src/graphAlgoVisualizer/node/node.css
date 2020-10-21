@@ -1,6 +1,8 @@
 .node {
   width: 2.22%;
+  /* width: 2.22 vw; */
   height: 30px;
+  /* height: 4vh; */
   /* height: 5%; */
   /* height: auto; */
   vertical-align: top;
