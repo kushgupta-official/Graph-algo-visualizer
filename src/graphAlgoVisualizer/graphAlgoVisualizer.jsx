@@ -39,7 +39,7 @@ class GraphAlgoVisualizer extends Component {
     isMovingEnd: false,
     addWeights: false,
     processActive: false,
-    description: "Select an Algorithm. Dragging on the Nodes creates Walls/Weights",
+    description: "Selecting the Nodes in the grid creates Obstacles/Weights. To switch from Obstacles to Weight and vice versa, use the checkbox at Navbar and select an Algorithm",
   };
 
   componentDidMount() {
