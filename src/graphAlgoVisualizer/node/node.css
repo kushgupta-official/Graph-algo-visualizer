@@ -100,7 +100,7 @@
 }
 
 .weight-present-path {
-  background-color: lightgreen;
+  background-color: yellow;
   background-image: url("./weight.svg");
   background-position: center;
   background-repeat: no-repeat;
