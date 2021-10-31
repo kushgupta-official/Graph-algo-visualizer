@@ -142,14 +142,14 @@ class GraphAlgoVisualizer extends Component {
 
   handleMouseEnter = (row, column) => {
     //Mouse entering a node with no click
-    if (!this.state.isMousePressed) {
+    if (!this.state.isMousePressed && !this.state.processActive) {
       if (
         !(
           (row === startNode_Row && column === startNode_Col) ||
           (row === endNode_Row && column === endNode_Col)
         )
       ) {
-        // console.log(row, column, "mouse enter");
+        console.log(row, column, "mouse enter");
         let newGrid;
         if (!this.state.addWeights) {
           newGrid = this.getNewGridWithWallToggled(row, column);
@@ -181,6 +181,7 @@ class GraphAlgoVisualizer extends Component {
       this.setState({grid:newGrid});
     }
     if (
+      this.state.isMousePressed &&
       !(
         (row === startNode_Row && column === startNode_Col) ||
         (row === endNode_Row && column === endNode_Col)
@@ -235,7 +236,7 @@ class GraphAlgoVisualizer extends Component {
   };
 
   handleMouseLeave = (row, column) => {
-    if (!this.state.isMousePressed) {
+    if (!this.state.isMousePressed && !this.state.processActive) {
       if (
         !(
           (row === startNode_Row && column === startNode_Col) ||
