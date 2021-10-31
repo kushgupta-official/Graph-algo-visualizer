@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "082be5981f82a5a7254758e1f045bea3",
+    "revision": "46c17e37988a2f3ef6da1d929ced03e4",
     "url": "/Graph-algo-visualizer/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Graph-algo-visualizer/static/css/2.8aa5a7f8.chunk.css"
   },
   {
-    "revision": "03441bdff0bb122045aa",
+    "revision": "9e3ae1a2dabfd9bbf3e4",
     "url": "/Graph-algo-visualizer/static/css/main.c44bf0ec.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Graph-algo-visualizer/static/js/2.7d62728f.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "03441bdff0bb122045aa",
-    "url": "/Graph-algo-visualizer/static/js/main.ebbb1843.chunk.js"
+    "revision": "9e3ae1a2dabfd9bbf3e4",
+    "url": "/Graph-algo-visualizer/static/js/main.4eae474b.chunk.js"
   },
   {
     "revision": "d28e38b26b5306d76a9d",
