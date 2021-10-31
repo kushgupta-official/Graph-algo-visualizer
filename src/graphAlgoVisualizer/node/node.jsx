@@ -20,7 +20,13 @@ class Node extends Component {
     if (this.props.pathNode === true){
       str = str + " node-shortestPath";
     }
-    return str;
+    if (this.props.pathNode === true && this.props.weight > 0){
+      str = "node weight-present-path";
+    }
+    else if (this.props.visitedNode === true && this.props.weight > 0){
+      str = "node weight-present-visited";
+    }
+    return str; 
   };
 
   render() {
