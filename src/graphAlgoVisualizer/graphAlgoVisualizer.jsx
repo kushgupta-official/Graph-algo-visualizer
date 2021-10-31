@@ -105,7 +105,7 @@ class GraphAlgoVisualizer extends Component {
         (row === endNode_Row && column === endNode_Col)
       )
     ) {
-      console.log(row, column, "mouse down");
+      // console.log(row, column, "mouse down");
       let newGrid;
       if (!this.state.addWeights) {
         newGrid = this.getNewGridWithWallToggled(row, column);
@@ -141,7 +141,28 @@ class GraphAlgoVisualizer extends Component {
   };
 
   handleMouseEnter = (row, column) => {
-    if (!this.state.isMousePressed) return;
+    //Mouse entering a node with no click
+    if (!this.state.isMousePressed) {
+      if (
+        !(
+          (row === startNode_Row && column === startNode_Col) ||
+          (row === endNode_Row && column === endNode_Col)
+        )
+      ) {
+        // console.log(row, column, "mouse enter");
+        let newGrid;
+        if (!this.state.addWeights) {
+          newGrid = this.getNewGridWithWallToggled(row, column);
+        } else {
+          newGrid = this.getNewGridWithWeights(row, column);
+        }
+        this.setState({ grid: newGrid });
+      } else {
+        // console.log("mouse entered starting or ending");
+      }
+      return;
+    }
+
   //  if (this.state.isMovingStart || this.state.isMovingEnd) return;
     if (this.state.isMovingStart){
       const newGrid=this.state.grid;
@@ -165,7 +186,7 @@ class GraphAlgoVisualizer extends Component {
         (row === endNode_Row && column === endNode_Col)
       )
     ) {
-      console.log(row, column, "mouse enter");
+      // console.log(row, column, "mouse enter");
       let newGrid;
       if (!this.state.addWeights) {
         newGrid = this.getNewGridWithWallToggled(row, column);
@@ -174,7 +195,7 @@ class GraphAlgoVisualizer extends Component {
       }
       this.setState({ grid: newGrid });
     } else {
-      console.log("mouse entered starting or ending");
+      // console.log("mouse entered starting or ending");
     }
   };
 
@@ -182,7 +203,7 @@ class GraphAlgoVisualizer extends Component {
     if (this.state.processActive === true) {
       return;
     }
-    console.log("mouse up");
+    // console.log("mouse up");
     this.setState({ isMousePressed: false });
 
     //if moving start or end
@@ -210,6 +231,29 @@ class GraphAlgoVisualizer extends Component {
       this.setState({ grid: newGrid, isMovingEnd: false });
       endNode_Row = row;
       endNode_Col = column;
+    }
+  };
+
+  handleMouseLeave = (row, column) => {
+    if (!this.state.isMousePressed) {
+      if (
+        !(
+          (row === startNode_Row && column === startNode_Col) ||
+          (row === endNode_Row && column === endNode_Col)
+        )
+      ) {
+        // console.log(row, column, "mouse enter");
+        let newGrid;
+        if (!this.state.addWeights) {
+          newGrid = this.getNewGridWithWallToggled(row, column);
+        } else {
+          newGrid = this.getNewGridWithWeights(row, column);
+        }
+        this.setState({ grid: newGrid });
+      } else {
+        // console.log("mouse entered starting or ending");
+      }
+      return;
     }
   };
 
@@ -494,6 +538,9 @@ class GraphAlgoVisualizer extends Component {
                       }
                       onMouseUp={(row, column) =>
                         this.handleMouseUp(row, column)
+                      }
+                      onMouseLeave={(row, column) =>
+                        this.handleMouseLeave(row,column)
                       }
                     ></Node>
                   );

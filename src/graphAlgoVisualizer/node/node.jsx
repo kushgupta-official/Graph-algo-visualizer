@@ -31,6 +31,7 @@ class Node extends Component {
       onMouseDown,
       onMouseUp,
       onMouseEnter,
+      onMouseLeave,
     } = this.props;
     //console.log(  this.props);
     return (
@@ -40,6 +41,7 @@ class Node extends Component {
         onMouseDown={() => onMouseDown(row, column)}
         onMouseEnter={() => onMouseEnter(row, column)}
         onMouseUp={() => onMouseUp(row, column)}
+        onMouseLeave={() => onMouseLeave(row,column)}
       ></div>
     );
   }
