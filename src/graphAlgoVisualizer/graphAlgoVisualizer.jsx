@@ -57,6 +57,8 @@ class GraphAlgoVisualizer extends Component {
           isVisited: false,
           previousNode: null,
           isWall: false,
+          visitedNode: false,
+          pathNode: false,
         };
         currentRow.push(currentNode);
       }
@@ -116,7 +118,7 @@ class GraphAlgoVisualizer extends Component {
     }
     // if user wants to change positon of start or end node
     else {
-      console.log(row, column, "mouse down starting or ending");
+      // console.log(row, column, "mouse down starting or ending");
       this.setState({ isMousePressed: true });
       if (row === startNode_Row && column === startNode_Col) {
         const newGrid = this.state.grid.slice();
@@ -149,7 +151,7 @@ class GraphAlgoVisualizer extends Component {
           (row === endNode_Row && column === endNode_Col)
         )
       ) {
-        console.log(row, column, "mouse enter");
+        // console.log(row, column, "mouse enter");
         let newGrid;
         if (!this.state.addWeights) {
           newGrid = this.getNewGridWithWallToggled(row, column);
@@ -263,12 +265,23 @@ class GraphAlgoVisualizer extends Component {
     document.getElementById("visualize").disabled = true;
     document.getElementById("clearAlgo").disabled = true;
     document.getElementById("clearGrid").disabled = true;
+    const newGrid = this.state.grid.slice();
     for (let i = 1; i < visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length - 1) {
         for (let j = 0; j < shortestPath.length; j++) {
           setTimeout(() => {
             setTimeout(() => {
               const node = shortestPath[j];
+              // if (j===0){
+              //   console.log(node);
+              // }
+              const newGridNode = newGrid[node.row][node.column];
+              const newNode = {
+                ...newGridNode,
+                pathNode: true,
+              };
+              newGrid[node.row][node.column] = newNode;
+              // this.setState({ grid: newGrid});
               if (
                 document.getElementById(`node-${node.row}-${node.column}`)
                   .className === "node weight-present-visited"
@@ -291,12 +304,21 @@ class GraphAlgoVisualizer extends Component {
             document.getElementById("visualize").disabled = false;
             document.getElementById("clearAlgo").disabled = false;
             document.getElementById("clearGrid").disabled = false;
+            this.setState({ grid: newGrid});
           }, 50 * shortestPath.length);
         }, 25 * visitedNodesInOrder.length);
         return;
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
+        // const newGrid = this.state.grid.slice();
+              const newGridNode = newGrid[node.row][node.column];
+              const newNode = {
+                ...newGridNode,
+                visitedNode: true,
+              };
+              newGrid[node.row][node.column] = newNode;
+              // this.setState({ grid: newGrid});
         if (
           document.getElementById(`node-${node.row}-${node.column}`)
             .className === "node weight-present"
@@ -405,6 +427,8 @@ class GraphAlgoVisualizer extends Component {
         newGrid[row][column].distance = Infinity;
         newGrid[row][column].isVisited = false;
         newGrid[row][column].previousNode = null;
+        newGrid[row][column].visitedNode = false;
+        newGrid[row][column].pathNode = false;
         if (
           !(
             (row === startNode_Row && column === startNode_Col) ||
@@ -439,6 +463,8 @@ class GraphAlgoVisualizer extends Component {
         newGrid[row][column].previousNode = null;
         newGrid[row][column].isWall = false;
         newGrid[row][column].weight = 0;
+        newGrid[row][column].visitedNode = false;
+        newGrid[row][column].pathNode = false;
         if (
           !(
             (row === startNode_Row && column === startNode_Col) ||
@@ -530,6 +556,8 @@ class GraphAlgoVisualizer extends Component {
                       previousNode={node.previousNode}
                       isWall={node.isWall}
                       weight={node.weight}
+                      visitedNode={node.visitedNode}
+                      pathNode={node.pathNode}
                       // isMousePressed={isMousePressed}
                       onMouseDown={(row, column) =>
                         this.handleMouseDown(row, column)

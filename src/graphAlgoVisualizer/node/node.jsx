@@ -14,6 +14,12 @@ class Node extends Component {
     } else if (this.props.weight > 0) {
       str = str + " weight-present";
     }
+    if (this.props.visitedNode === true){
+      str = str + " node-visited";
+    }
+    if (this.props.pathNode === true){
+      str = str + " node-shortestPath";
+    }
     return str;
   };
 

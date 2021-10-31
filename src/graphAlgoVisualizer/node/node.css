@@ -54,7 +54,7 @@
   animation-duration: 0.1s;
   animation-iteration-count: 1;
   animation-play-state: running;
-  animation-timing-function: ease-out;
+  animation-timing-function: ease-in-out;
 }
 
 .endNode {
@@ -63,7 +63,7 @@
   animation-duration: 0.1s;
   animation-iteration-count: 1;
   animation-play-state: running;
-  animation-timing-function: ease-out;
+  animation-timing-function: ease-in-out;
 }
 
 @keyframes StartEndNodeAnimation {
