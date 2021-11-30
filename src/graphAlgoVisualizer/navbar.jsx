@@ -9,7 +9,7 @@ const Checkbox = (props) => <input type="checkbox" {...props} />;
 
 class classNavbar extends Component {
   state = {
-    currentAlgo: "null",
+    currentAlgo: "Choose Algorithm",
     addWeights: "false",
   };
   forDijkstra = () => {
@@ -17,32 +17,32 @@ class classNavbar extends Component {
     this.props.handleDescription("Dijkstra");
   };
   forAstar = () => {
-    this.setState({ currentAlgo: "Astar" });
+    this.setState({ currentAlgo: "A* Search" });
     this.props.handleDescription("Astar");
   };
   forBFS = () => {
-    this.setState({ currentAlgo: "BFS" });
+    this.setState({ currentAlgo: "Breadth First Search" });
     this.props.handleDescription("BFS");
   };
   forDFS = () => {
-    this.setState({ currentAlgo: "DFS" });
+    this.setState({ currentAlgo: "Depth First Search" });
     this.props.handleDescription("DFS");
   };
   visualize = () => {
     if (this.state.currentAlgo === "Dijkstra") {
       this.props.handleDijkstra();
-    } else if (this.state.currentAlgo === "Astar") {
+    } else if (this.state.currentAlgo === "A* Search") {
       this.props.handleAstar();
-    } else if (this.state.currentAlgo === "BFS") {
+    } else if (this.state.currentAlgo === "Breadth First Search") {
       this.props.handleBFS();
-    } else if (this.state.currentAlgo === "DFS") {
+    } else if (this.state.currentAlgo === "Depth First Search") {
       this.props.handleDFS();
     }
   };
   handleCheckboxChange = () => {
     console.log(this.state.addWeights);
     this.setState({ addWeights: !this.state.addWeights });
-    console.log(this.state.addWeights, "hi");
+    // console.log(this.state.addWeights, "hi");
   };
   render() {
     const {
@@ -56,13 +56,13 @@ class classNavbar extends Component {
     } = this.props;
     return (
       <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-        <Navbar.Brand className="mr-4">Graph Algo Visualizer</Navbar.Brand>
+        <Navbar.Brand className="mr-4">Path Finding Visualizer</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
             {/* <Nav.Link href="#home">Home</Nav.Link>
             <Nav.Link href="#link">Link</Nav.Link> */}
-            <NavDropdown title="Algorithms" id="basic-nav-dropdown">
+            <NavDropdown title={this.state.currentAlgo} id="basic-nav-dropdown">
               <NavDropdown.Item onClick={this.forDijkstra}>
                 Dijkstra
               </NavDropdown.Item>
