@@ -49,7 +49,7 @@ class Canvas extends React.Component {
                 }
 
             }
-            console.log(visited, unvisited);
+            // console.log(visited, unvisited);
             this.props.drawPrims(parent, currentVertex, visited, unvisited, this.canvas, this.canvas.getContext('2d'));
             visited.push(unvisited[currentVertex]);
             unvisited.splice(currentVertex, 1);
