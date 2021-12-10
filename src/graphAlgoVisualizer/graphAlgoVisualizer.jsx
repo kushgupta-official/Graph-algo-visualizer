@@ -580,7 +580,9 @@ class GraphAlgoVisualizer extends Component {
         </div>
         {/* <Footer/> */}
         <div className="footer mt-2">
-          <p>Created by Kush Gupta <span role="img" aria-label="owl">🦉 Hosted on <a href="https://github.com/kushgupta-official/Graph-algo-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a></span> 
+          {/* <p>Created by Kush Gupta <span role="img" aria-label="owl">🦉 Hosted on <a href="https://github.com/kushgupta-official/Graph-algo-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a></span> 
+          </p> */}
+          <p>Hosted on <a href="https://github.com/kushgupta-official/Graph-algo-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a>
           </p>
         </div>
       </div>
