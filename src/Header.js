@@ -1,11 +1,9 @@
 import React from "react";
-// import { NavLink } from 'react-router-dom'
 import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
-  // const {location}=props;
   return (
     <>
       <Nav
@@ -14,7 +12,6 @@ const Header = () => {
         defaultActiveKey="/gav"
         className="navstyle"
         style={{ backgroundColor: "#262626" }}
-        // sticky="top"
       >
         <Nav.Item>
           <Link to="/gav">
@@ -42,19 +39,6 @@ const Header = () => {
           </Link>
         </Nav.Item>
       </Nav>
-      {/* <ul className="nav nav-pills nav-justified bg-dark border-1">
-        <li className="nav-item">
-          <div className="nav-link" aria-current="page">
-            Path Finding Visualizer
-          </div>
-        </li>
-        <li className="nav-item">
-          <div className="nav-link">Minimum Spanning Tree</div>
-        </li>
-        <li className="nav-item">
-          <div className="nav-link active">Topological Sorting</div>
-        </li>
-      </ul> */}
     </>
   );
 };

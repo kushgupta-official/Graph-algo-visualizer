@@ -42,7 +42,6 @@ class classNavbar extends Component {
   handleCheckboxChange = () => {
     console.log(this.state.addWeights);
     this.setState({ addWeights: !this.state.addWeights });
-    // console.log(this.state.addWeights, "hi");
   };
   render() {
     const {
@@ -60,8 +59,6 @@ class classNavbar extends Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            {/* <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#link">Link</Nav.Link> */}
             <NavDropdown title={this.state.currentAlgo} id="basic-nav-dropdown">
               <NavDropdown.Item onClick={this.forDijkstra}>
                 Dijkstra
@@ -75,10 +72,6 @@ class classNavbar extends Component {
               <NavDropdown.Item onClick={this.forDFS}>
                 Depth First Search
               </NavDropdown.Item>
-              {/* <NavDropdown.Divider />
-              <NavDropdown.Item">
-                Separated link
-              </NavDropdown.Item> */}
             </NavDropdown>
             <Button
               variant="success"

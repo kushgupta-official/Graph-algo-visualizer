@@ -143,15 +143,12 @@ class FormInput extends React.Component {
     if (answer.length < this.temptaskCounter) {
 
       this.tempanswer="Topological Sort is not possible since given graph has cycle";
-      // this.setState({ answer: "Topological Sort is not possible since given graph has cycle" });
     }
     else {
        this.tempanswer="Order Of Execution = " + answer.toString();
-      // this.setState({ answer: "Order Of Execution = " + answer.toString() }) 
     }
   }
   visualizeNetwork() {
-    // console.log(this.temp);
     const data = this.tempdata;
     let adjMap = new Map();
     for (let i = 0; i < this.temptaskCounter; i++) {
@@ -193,7 +190,6 @@ class FormInput extends React.Component {
       nodes: network,
       edges: edges
     };
-    // this.setState({ graph: data });
     this.tempgraph=data;
   }
 
@@ -202,29 +198,11 @@ class FormInput extends React.Component {
   }
 
   handleSubmit(event) {
-    // alert('Submitted: ' + this.state.data);
     event.preventDefault();
-    // console.log(event.target[1].name,event.target[1].value);
-    // this.setState(prevState => ({
-    //   data: {
-    //     ...prevState.data,
-
-    //     [event.target[0].name]: event.target[0].value,
-    //     [event.target[2].name]: event.target[2].value,
-    //     [event.target[4].name]: event.target[4].value,
-    //     [event.target[6].name]: event.target[6].value,
-    //     [event.target[1].name]: event.target[1].value,
-    //     [event.target[3].name]: event.target[3].value,
-    //     [event.target[5].name]: event.target[5].value,
-    //     [event.target[7].name]: event.target[7].value
-    //   }
-    // }));
-
     if (this.temptaskCounter >= 1 && this.tempdata.value1 !== "") {
       event.target.parentElement.children[4].hidden = false;
     }
 
-    // .children[1].hidden=true;
     this.visualizeNetwork();
     this.setState({
       data: this.tempdata
@@ -232,12 +210,6 @@ class FormInput extends React.Component {
       , graph: this.tempgraph,
       answer: this.tempanswer,
     })
-    // this.setState({
-    //   data: this.tempdata
-    //   , taskCounter: this.temptaskCounter
-    //   , graph: this.tempgraph,
-    //   answer: this.tempanswer,
-    // },()=>this.visualizeNetwork());
     this.messagesEnd.scrollIntoView({ behavior: "smooth" });
     console.log(this.state.answer);
     // this.resetForm();
@@ -311,8 +283,6 @@ class FormInput extends React.Component {
 
           </div>
           <div className="vis-react m-1" >
-            {/* <NetworkCanvas
-      value1 = {this.state.graph}/> */}
             <Network value1={this.state.graph} />
           </div>
 

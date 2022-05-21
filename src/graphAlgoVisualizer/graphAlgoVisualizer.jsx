@@ -107,7 +107,6 @@ class GraphAlgoVisualizer extends Component {
         (row === endNode_Row && column === endNode_Col)
       )
     ) {
-      // console.log(row, column, "mouse down");
       let newGrid;
       if (!this.state.addWeights) {
         newGrid = this.getNewGridWithWallToggled(row, column);
@@ -118,7 +117,6 @@ class GraphAlgoVisualizer extends Component {
     }
     // if user wants to change positon of start or end node
     else {
-      // console.log(row, column, "mouse down starting or ending");
       this.setState({ isMousePressed: true });
       if (row === startNode_Row && column === startNode_Col) {
         const newGrid = this.state.grid.slice();
@@ -151,7 +149,6 @@ class GraphAlgoVisualizer extends Component {
           (row === endNode_Row && column === endNode_Col)
         )
       ) {
-        // console.log(row, column, "mouse enter");
         let newGrid;
         if (!this.state.addWeights) {
           newGrid = this.getNewGridWithWallToggled(row, column);
@@ -160,12 +157,10 @@ class GraphAlgoVisualizer extends Component {
         }
         this.setState({ grid: newGrid });
       } else {
-        // console.log("mouse entered starting or ending");
       }
       return;
     }
 
-  //  if (this.state.isMovingStart || this.state.isMovingEnd) return;
     if (this.state.isMovingStart){
       const newGrid=this.state.grid;
       newGrid[startNode_Row][startNode_Col].isStart=false;
@@ -189,7 +184,6 @@ class GraphAlgoVisualizer extends Component {
         (row === endNode_Row && column === endNode_Col)
       )
     ) {
-      // console.log(row, column, "mouse enter");
       let newGrid;
       if (!this.state.addWeights) {
         newGrid = this.getNewGridWithWallToggled(row, column);
@@ -198,7 +192,6 @@ class GraphAlgoVisualizer extends Component {
       }
       this.setState({ grid: newGrid });
     } else {
-      // console.log("mouse entered starting or ending");
     }
   };
 
@@ -206,7 +199,6 @@ class GraphAlgoVisualizer extends Component {
     if (this.state.processActive === true) {
       return;
     }
-    // console.log("mouse up");
     this.setState({ isMousePressed: false });
 
     //if moving start or end
@@ -245,7 +237,6 @@ class GraphAlgoVisualizer extends Component {
           (row === endNode_Row && column === endNode_Col)
         )
       ) {
-        // console.log(row, column, "mouse enter");
         let newGrid;
         if (!this.state.addWeights) {
           newGrid = this.getNewGridWithWallToggled(row, column);
@@ -254,7 +245,6 @@ class GraphAlgoVisualizer extends Component {
         }
         this.setState({ grid: newGrid });
       } else {
-        // console.log("mouse entered starting or ending");
       }
       return;
     }
@@ -272,16 +262,12 @@ class GraphAlgoVisualizer extends Component {
           setTimeout(() => {
             setTimeout(() => {
               const node = shortestPath[j];
-              // if (j===0){
-              //   console.log(node);
-              // }
               const newGridNode = newGrid[node.row][node.column];
               const newNode = {
                 ...newGridNode,
                 pathNode: true,
               };
               newGrid[node.row][node.column] = newNode;
-              // this.setState({ grid: newGrid});
               if (
                 document.getElementById(`node-${node.row}-${node.column}`)
                   .className === "node weight-present-visited"
@@ -311,14 +297,12 @@ class GraphAlgoVisualizer extends Component {
       }
       setTimeout(() => {
         const node = visitedNodesInOrder[i];
-        // const newGrid = this.state.grid.slice();
               const newGridNode = newGrid[node.row][node.column];
               const newNode = {
                 ...newGridNode,
                 visitedNode: true,
               };
               newGrid[node.row][node.column] = newNode;
-              // this.setState({ grid: newGrid});
         if (
           document.getElementById(`node-${node.row}-${node.column}`)
             .className === "node weight-present"
@@ -334,16 +318,12 @@ class GraphAlgoVisualizer extends Component {
   };
 
   visualizeDijkstra = () => {
-    // const toBeDisabled = document.getElementById("button");
-    // toBeDisabled.disabled = true;
     this.clearAlgo(); //for clearing grid for any previous algo if implemented
     const { grid } = this.state;
     const startNode = grid[startNode_Row][startNode_Col];
     const endNode = grid[endNode_Row][endNode_Col];
     const visitedNodesInOrder = dijkstra(grid, startNode, endNode);
-    //console.log(visitedNodesInOrder);
     const shortestPath = getShortestPathDijkstra(grid, startNode, endNode);
-    //console.log(visitedNodesInOrder);
     const shortestPathCost = getWeightOfShortestPathDijkstra(
       grid,
       shortestPath
@@ -354,9 +334,6 @@ class GraphAlgoVisualizer extends Component {
       pathLength: shortestPath.length,
       pathCost: shortestPathCost,
     });
-    // toBeDisabled.disabled = false;
-    // console.log(shortestPath);
-    // console.log(grid);
   };
 
   visualizeAstar = () => {
@@ -365,9 +342,7 @@ class GraphAlgoVisualizer extends Component {
     const startNode = grid[startNode_Row][startNode_Col];
     const endNode = grid[endNode_Row][endNode_Col];
     const visitedNodesInOrder = aStar(grid, startNode, endNode);
-    //console.log(visitedNodesInOrder);
     const shortestPath = getShortestPathAstar(grid, startNode, endNode);
-    //console.log(visitedNodesInOrder);
     const shortestPathCost = getWeightOfShortestPathAstar(grid, shortestPath);
     this.animateAlgo(visitedNodesInOrder, shortestPath);
     this.setState({
@@ -375,8 +350,6 @@ class GraphAlgoVisualizer extends Component {
       pathLength: shortestPath.length,
       pathCost: shortestPathCost,
     });
-    // console.log(shortestPath);
-    // console.log(grid);
   };
 
   visualizeBFS = () => {
@@ -385,9 +358,7 @@ class GraphAlgoVisualizer extends Component {
     const startNode = grid[startNode_Row][startNode_Col];
     const endNode = grid[endNode_Row][endNode_Col];
     const visitedNodesInOrder = bfs(grid, startNode, endNode);
-    //console.log(visitedNodesInOrder);
     const path = getPathBFS(grid, startNode, endNode);
-    //console.log(visitedNodesInOrder);
     this.animateAlgo(visitedNodesInOrder, path);
     const pathCost = getWeightOfShortestPathBFS(grid, path);
     this.setState({
@@ -395,8 +366,6 @@ class GraphAlgoVisualizer extends Component {
       pathLength: path.length,
       pathCost,
     });
-    //console.log(path);
-    //console.log(grid);
   };
 
   visualizeDFS = () => {
@@ -405,9 +374,7 @@ class GraphAlgoVisualizer extends Component {
     const startNode = grid[startNode_Row][startNode_Col];
     const endNode = grid[endNode_Row][endNode_Col];
     const visitedNodesInOrder = dfs(grid, startNode, endNode);
-    //console.log(visitedNodesInOrder);
     const path = getPathDFS(grid, startNode, endNode);
-    //console.log(visitedNodesInOrder);
     this.animateAlgo(visitedNodesInOrder, path);
     const pathCost = getWeightOfPathDFS(grid, path);
     this.setState({
@@ -415,8 +382,6 @@ class GraphAlgoVisualizer extends Component {
       pathLength: path.length,
       pathCost,
     });
-    //console.log(path);
-    //console.log(grid);
   };
 
   //clear visitedNodes and shortestPath properties from the grid leaving walls and weights untouched
@@ -484,9 +449,7 @@ class GraphAlgoVisualizer extends Component {
   };
 
   handleCheckboxChange = () => {
-    //console.log(this.state.addWeights);
     this.setState({ addWeights: !this.state.addWeights });
-   // console.log(this.state.addWeights, "hi");
   };
 
   getDescription=(algo)=>{
@@ -506,9 +469,7 @@ class GraphAlgoVisualizer extends Component {
 
   render() {
     const { grid } = this.state;
-    //  console.log(grid);
     return (
-      // <div className="container-fluid">
       <div>
         <Navbar
           addWeights={this.state.addWeights}
@@ -577,13 +538,6 @@ class GraphAlgoVisualizer extends Component {
               </div>
             );
           })}
-        </div>
-        {/* <Footer/> */}
-        <div className="footer mt-2">
-          {/* <p>Created by Kush Gupta <span role="img" aria-label="owl">🦉 Hosted on <a href="https://github.com/kushgupta-official/Graph-algo-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a></span> 
-          </p> */}
-          <p>Hosted on <a href="https://github.com/kushgupta-official/Graph-algo-visualizer" target="_blank" rel="noopener noreferrer">GitHub</a>
-          </p>
         </div>
       </div>
     );

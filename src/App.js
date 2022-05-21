@@ -8,36 +8,33 @@ import {
   Route,
 } from "react-router-dom";
 import Header from "./Header";
-// import "./App.css";
+import Footer from "./Footer";
 
 class App extends Component {
   state = {};
   render() {
     return (
-      //<div className="App-header">
-      <Router>
-        {/* <div className="App"> */}
-        <Header />
-        <Switch>
-          <Route exact path="/" element={<GraphAlgoVisualizer />} />
-          <Route
-            exact
-            path="/Graph-Algo-Visualizer"
-            element={<GraphAlgoVisualizer />}
-          />
-          <Route exact path="/gav" element={<GraphAlgoVisualizer />} />
-          <Route exact path="/mst" element={<MinimumSpanningTree />} />
-          <Route
-            exact
-            path="/TopologicalSorting"
-            element={<TopologicalSorting />}
-          />
-        </Switch>
-        {/* </div> */}
-      </Router>
-      // <div>
-      //   <GraphAlgoVisualizer />
-      // </div>
+      <>
+        <Router>
+          <Header />
+          <Switch>
+            <Route exact path="/" element={<GraphAlgoVisualizer />} />
+            <Route
+              exact
+              path="/Graph-Algo-Visualizer"
+              element={<GraphAlgoVisualizer />}
+            />
+            <Route exact path="/gav" element={<GraphAlgoVisualizer />} />
+            <Route exact path="/mst" element={<MinimumSpanningTree />} />
+            <Route
+              exact
+              path="/TopologicalSorting"
+              element={<TopologicalSorting />}
+            />
+          </Switch>
+        </Router>
+        <Footer />
+      </>
     );
   }
 }

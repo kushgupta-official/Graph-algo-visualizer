@@ -11,7 +11,6 @@ class Canvas extends React.Component {
     const ctx = this.canvas.getContext("2d");
     this.setState({ coord: newcoord }, function () {
       this.props.draw(this.canvas, ctx, this.state.coord);
-      //console.log(this.state.coord);
     });
   }
 
@@ -56,8 +55,6 @@ class Canvas extends React.Component {
       minEdge = minEdge / 5;
       minEdge = Math.round(minEdge);
       total += minEdge;
-      // this.setState({totalCount:total});
-      // console.log(visited, unvisited);
       console.log(this.state.totalCount);
       this.props.drawPrims(
         minEdge,
@@ -146,7 +143,6 @@ class Canvas extends React.Component {
               this.setState({ coord: newCoord }, function () {
                 this.props.draw(this.canvas, ctx, this.state.coord);
                 this.prims();
-                //console.log(this.state.coord);
               });
             }
           }}

@@ -1,11 +1,5 @@
 .grid {
-  /* margin: 30px 100px 100px; */
   margin-top: 10px;
-  /* width: 100vw; */
-  /* height: 100vh; */
-  /* height: 100%; */
-  /* width: 100%; */
-  /* margin-top: 2%; */
 }
 
 .time {
@@ -29,16 +23,6 @@
 .checkBox {
   color: white;
   margin-left: 5px;
-}
-
-.footer {
-  /* position: fixed; */
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #343a40;
-  color: white;
-  text-align: center;
 }
 
 .description {
