@@ -1,0 +1,45 @@
+.button{
+    background-color: #343a40;
+    color: #f8f9fa;
+    border-radius: 1em;
+}
+.button-primary
+{
+    background-color: #343a40;
+    color: #f8f9fa;
+    padding: 1em;
+}
+.lead
+{
+    text-align: center;
+}
+.text-muted{
+    text-align: center;
+    font-size: 0.9em;
+}
+.input-field
+{
+    border-radius: 0.25em none;
+}
+.result{
+    padding-bottom: 2px;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: lighter;
+    height:6vh;
+}
+.vis-react{
+    
+    border: 0.25em solid #343a40;
+    height: 93vh;
+}
+.mainDiv{
+    height: 93vh;
+}
+.vis-network{
+    height: 93vh;
+}
+.vis-react>canvas{
+    height: 93vh;
+
+}

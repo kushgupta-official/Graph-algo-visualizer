@@ -55,7 +55,7 @@ class classNavbar extends Component {
       pathCost,
     } = this.props;
     return (
-      <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
+      <Navbar variant="dark" expand="lg" sticky="top" style={{backgroundColor: "#262626"}}>
         <Navbar.Brand className="mr-4">Path Finding Visualizer</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
